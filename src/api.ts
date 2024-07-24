@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 interface LoginResponse {
   message: string;
   token: string;
@@ -33,6 +35,8 @@ export async function LoginApi(
   }
 
   const data = await response.json();
+  Cookies.set('token', data.token, { expires: 1 / 24 });
+  window.location.href = '/home'
   return data as LoginResponse;
 }
 
@@ -41,6 +45,21 @@ export async function RegisterApi(formData: FormDataRegister): Promise<void> {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
     body: JSON.stringify(formData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Something went wrong');
+  }
+}
+
+export async function CreatePost(content: string): Promise<void> {
+  const response = await fetch('http://192.168.1.153:3000/api/createPost', {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${Cookies.get('token')}`,
+    },
+    method: 'POST',
+    body: JSON.stringify({ content }),
   });
 
   if (!response.ok) {
