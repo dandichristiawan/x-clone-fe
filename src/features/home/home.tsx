@@ -18,7 +18,7 @@ export const Home = () => {
     async function get() {
         setLoadingData(true)
         try {
-            const res = await fetch('http://192.168.103.56:3000/api/getPosts', {
+            const res = await fetch('http://192.168.1.153:3000/api/getPosts', {
                 mode: 'cors',
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
@@ -39,7 +39,7 @@ export const Home = () => {
     async function tweet(content: string) {
         setLoadingPost(true);
         try {
-            const res = await fetch('http://192.168.103.56:3000/api/createPost', {
+            const res = await fetch('http://192.168.1.153:3000/api/createPost', {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${Cookies.get('token')}`,
@@ -69,7 +69,7 @@ export const Home = () => {
     };
 
     return (
-        <main className="flex-1 md:max-w-lg lg:max-w-2xl xl:max-w-2xl 2xl:max-w-7xl bg-black text-white border border-gray-600 border-t-0 border-b-0 border-r-1 border-l-1 p- justify-center items-center overflow-y-auto min-h-screen">
+        <main className="flex-1 md:max-w-lg lg:max-w-2xl 2xl:max-w-7xl bg-black text-white border border-gray-600 border-t-0 border-b-0 border-r-1 border-l-1 justify-center items-center overflow-y-auto min-h-screen">
             {/* <nav className="bg-blue-600">asd</nav> */}
             {isTokenExist ? (
                 <>

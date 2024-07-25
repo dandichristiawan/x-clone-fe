@@ -7,7 +7,7 @@ export interface PropsData {
     content: string
     likes: number
     replies: Replies[]
-    createdAt: Date
+    createdAt: string
 }
 
 interface Replies {

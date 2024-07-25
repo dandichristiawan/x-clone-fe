@@ -1,10 +1,8 @@
-import React from 'react';
-
 export const NavbarRight = () => {
   return (
     <aside
       id="default-sidebar"
-      className="fixed top-0 right-0 z-40 sm:w-0 md:w-36 lg:w-[338px] h-screen transition-transform translate-x-full sm:translate-x-0"
+      className="fixed top-0 right-0 z-40 sm:w-0 md:w-36 lg:w-[295.5px] 2xl:w-[311px] h-screen transition-transform translate-x-full sm:translate-x-0"
       aria-label="Sidebar"
     >
       <div className="h-full px-3 py-4 overflow-y-auto bg-black dark:bg-gray-800">
