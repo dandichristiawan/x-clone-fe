@@ -1,37 +1,70 @@
 import React from 'react'
 import Cookies from 'js-cookie';
-import { CreatePostApi } from '@/api';
-import { CreatePostComponent } from './create-post/post';
 import { PropsData } from '@/features/home/home-types';
-import { ListPostComponent } from './list-post/list';
+import { ListPostComponent } from '@/features/home/list-post/list';
+import { CreatePostComponent } from '@/features/home/create-post/post';
+import { SkeletonPosts } from './list-post/skeleton';
 
 export const Home = () => {
 
     const isTokenExist = Cookies.get('token');
+
     const [data, setData] = React.useState<PropsData[]>();
+    const [loadingData, setLoadingData] = React.useState<boolean>(false);
+
     const [createPost, setCreatePost] = React.useState<string>('');
+    const [loadingPost, setLoadingPost] = React.useState<boolean>(false);
 
     async function get() {
+        setLoadingData(true)
         try {
             const res = await fetch('http://192.168.103.56:3000/api/getPosts', {
                 mode: 'cors',
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             });
+            if (!res.ok) {
+                throw new Error('Something went wrong!');
+            }
             const data = await res.json();
             setData(data);
-            console.log(data);
+            setTimeout(() => {
+                setLoadingData(false);
+            }, 3000);
         } catch (error) {
             console.error(error);
         }
     }
+
+    async function tweet(content: string) {
+        setLoadingPost(true);
+        try {
+            const res = await fetch('http://192.168.103.56:3000/api/createPost', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${Cookies.get('token')}`,
+                },
+                method: 'POST',
+                body: JSON.stringify({ content }),
+            });
+            if (!res.ok) {
+                throw new Error('Something went wrong!');
+            }
+            setLoadingPost(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
 
     React.useEffect(() => {
         get();
     }, []);
 
     const onCreatePost = async () => {
-        await CreatePostApi(createPost);
+        await tweet(createPost);
+        setCreatePost('');
         await get();
     };
 
@@ -42,12 +75,17 @@ export const Home = () => {
                 <>
                     <CreatePostComponent
                         val={createPost}
+                        loading={loadingPost}
                         onChangeVal={setCreatePost}
                         onCreatePost={onCreatePost}
                     />
                 </>
             ) : null}
-            <ListPostComponent data={data} />
+            {loadingData ? (
+                <SkeletonPosts data={data} />
+            ) : (
+                <ListPostComponent data={data} />
+            )}
         </main>
     )
 }

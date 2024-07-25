@@ -51,18 +51,3 @@ export async function RegisterApi(formData: FormDataRegister): Promise<void> {
     throw new Error('Something went wrong');
   }
 }
-
-export async function CreatePostApi(content: string): Promise<void> {
-  const response = await fetch('http://192.168.103.56:3000/api/createPost', {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${Cookies.get('token')}`,
-    },
-    method: 'POST',
-    body: JSON.stringify({ content }),
-  });
-
-  if (!response.ok) {
-    throw new Error('Something went wrong');
-  }
-}
