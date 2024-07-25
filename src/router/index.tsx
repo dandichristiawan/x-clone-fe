@@ -1,7 +1,8 @@
-import { AuthenticationPage } from '@/pages/auth/authentication-page';
+import { PostPage } from '@/pages/post/post-page';
+import { HomePage } from '@/pages/home/home-page';
 import { SignInPage } from '@/pages/auth/signin/sign-in-page';
 import { SignUpPage } from '@/pages/auth/signup/sign-up-page';
-import { HomePage } from '@/pages/home/home-page';
+import { AuthenticationPage } from '@/pages/auth/authentication-page';
 import { Navigate, useRoutes, RouteObject } from 'react-router-dom';
 
 
@@ -22,6 +23,10 @@ const Routes = () => {
         {
             path: '/home',
             element: <HomePage />
+        },
+        {
+            path: '/post/:id',
+            element: <PostPage />
         }
     ]
 

@@ -18,7 +18,7 @@ export const NavbarLeft = () => {
       <div className="h-full px-3 py-4 overflow-y-auto bg-black dark:bg-gray-800">
         <ul className="space-y-2 font-medium">
           <li>
-            <Link to={'#'} className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1d9bf0] dark:hover:bg-gray-700 group">
+            <Link to={'/home'} className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1d9bf0] dark:hover:bg-gray-700 group">
               <svg
                 className="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                 aria-hidden="true"

@@ -2,8 +2,7 @@ import React from 'react'
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Separator } from '@/components/ui/separator';
-
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 type Props = {
     val: string
@@ -15,7 +14,10 @@ type Props = {
 export const CreatePostComponent = ({ val, loading, onChangeVal, onCreatePost }: Props) => {
     return (
         <div className="border border-gray-600 border-r-0 border-l-0 flex flex-row p-2 gap-2 w-full">
-            <div className="rounded-full bg-gray-500 p-2 w-10 h-10"></div>
+            <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
             <div className="flex flex-col w-full">
                 <Textarea
                     value={val}
