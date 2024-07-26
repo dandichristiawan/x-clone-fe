@@ -63,6 +63,15 @@
   }
 }
 
+#default-sidebar-right::-webkit-scrollbar {
+  display: none;
+}
+
+#default-sidebar-right {
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
 @layer base {
   * {
     @apply border-border;

@@ -10,7 +10,7 @@ export const SkeletonPosts = ({ data }: Props) => {
         <>
             {data ? (
                 <>
-                    <div className="flex flex-col w-1/2">
+                    <div className="flex flex-col w-2/5">
                         {Array.from({ length: data.length }).map((_, index) => (
                             <div
                                 key={index}

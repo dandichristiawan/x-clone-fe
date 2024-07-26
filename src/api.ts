@@ -24,7 +24,7 @@ interface FormDataRegister {
 export async function LoginApi(
   formData: FormDataLogin
 ): Promise<LoginResponse> {
-  const response = await fetch('http://192.168.103.56:3000/api/login', {
+  const response = await fetch('http://192.168.1.153:3000/api/login', {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
     body: JSON.stringify(formData),
@@ -36,12 +36,14 @@ export async function LoginApi(
 
   const data = await response.json();
   Cookies.set('token', data.token, { expires: 1 / 24 });
+  Cookies.set('fullname', data.user.fullname, { expires: 1 / 24 });
+  Cookies.set('username', data.user.username, { expires: 1 / 24 });
   window.location.href = '/home'
   return data as LoginResponse;
 }
 
 export async function RegisterApi(formData: FormDataRegister): Promise<void> {
-  const response = await fetch('http://192.168.103.56:3000/api/signup', {
+  const response = await fetch('http://192.168.1.153:3000/api/signup', {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
     body: JSON.stringify(formData),

@@ -21,7 +21,7 @@ export const PostDetail = () => {
   async function getSingle() {
     setLoading(true);
     try {
-      const res = await fetch(`http://192.168.103.56:3000/api/post/${id}`, {
+      const res = await fetch(`http://192.168.1.153:3000/api/post/${id}`, {
         mode: 'cors',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -44,22 +44,25 @@ export const PostDetail = () => {
   }, []);
 
   return (
-    <main className="bg-black min-h-dvh flex flex-col items-center justify-start text-white ">
-      <div className="bg-black flex flex-col w-1/2 p-5">
+    <div className="flex flex-col items-center justify-start text-white">
+      <div className="border border-gray-600 border-t-0 flex flex-col w-2/5 p-5">
         <div className="flex flex-row gap-4 items-center">
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <h1>@{data?.user.username}</h1>
+          <div className="flex flex-col">
+            <h1 className="text-white font-bold">{data?.user.fullname}</h1>
+            <p className="text-gray-500">@{data?.user.username}</p>
+          </div>
         </div>
         <p className="my-4">{data?.content}</p>
         <p>{data?.createdAt}</p>
 
-        <Separator className="my-4 border border-gray-600" />
+        <Separator className="my-4 border border-gray-600 border-1" />
         <div className="flex flex-row gap-2">
           <img src={chart} alt="chat bubble" width={18} height={18} />
-          <p>View post engagements</p>
+          <p className="text-gray-500">View post engagements</p>
         </div>
         <Separator className="my-4 border border-gray-600" />
         {data ? (
@@ -114,15 +117,18 @@ export const PostDetail = () => {
         {data?.replies.map((val, idx) => (
           <div
             key={idx}
-            className="border border-b-0 border-l-1 border-r-1 border-gray-600 p-4 w-1/2"
+            className="border border-b-0 border-l-1 border-r-1 border-gray-600 p-4 w-2/5"
           >
             <>
-              <div className="flex flex-row gap-4 items-center">
+              <div className="flex flex-row gap-4 items-start">
                 <Avatar>
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <h1>@{val.user.username}</h1>
+                <div className="flex flex-row gap-2">
+                  <h1 className="font-bold">{val.user.fullname}</h1>
+                  <p className="text-gray-500">@{val.user.username}</p>
+                </div>
               </div>
               <div className="flex flex-col ml-14">
                 <p className="">{val.reply}</p>
@@ -136,7 +142,12 @@ export const PostDetail = () => {
                     />
                   </div>
                   <div className="flex flex-row items-center gap-2">
-                    <img src={repost} alt="chat bubble" width={20} height={20} />
+                    <img
+                      src={repost}
+                      alt="chat bubble"
+                      width={20}
+                      height={20}
+                    />
                   </div>
                   <div className="flex flex-row  items-center gap-2">
                     <img src={love} alt="chat bubble" width={18} height={18} />
@@ -159,6 +170,6 @@ export const PostDetail = () => {
           </div>
         ))}
       </div>
-    </main>
+    </div>
   );
 };

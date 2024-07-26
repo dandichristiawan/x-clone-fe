@@ -3,6 +3,7 @@ export interface PropsData {
     user: {
         _id: string
         username: string
+        fullname: string
     }
     content: string
     likes: number
@@ -15,6 +16,7 @@ interface Replies {
     user: {
         _id: string
         username: string
+        fullname: string
     }
     reply: string
 }

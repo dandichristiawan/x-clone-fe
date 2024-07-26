@@ -3,9 +3,10 @@ export interface PropsData {
   user: {
     _id: string;
     username: string;
+    fullname: string;
   };
   content: string;
   likes: number;
-  replies: string[]
+  replies: string[];
   createdAt: string;
-} 
+}
