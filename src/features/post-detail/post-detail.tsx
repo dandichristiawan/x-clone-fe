@@ -21,7 +21,7 @@ export const PostDetail = () => {
   async function getSingle() {
     setLoading(true);
     try {
-      const res = await fetch(`http://192.168.1.153:3000/api/post/${id}`, {
+      const res = await fetch(`http://192.168.103.56:3000/api/post/${id}`, {
         mode: 'cors',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -44,8 +44,8 @@ export const PostDetail = () => {
   }, []);
 
   return (
-    <main className="flex-1 md:max-w-lg lg:max-w-2xl 2xl:max-w-7xl bg-black text-white border border-gray-600 border-t-0 border-b-0 border-r-1 border-l-1 justify-center items-center overflow-y-auto min-h-screen">
-      <div className="p-5">
+    <main className="bg-black min-h-dvh flex flex-col items-center justify-start text-white ">
+      <div className="bg-black flex flex-col w-1/2 p-5">
         <div className="flex flex-row gap-4 items-center">
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
@@ -101,7 +101,7 @@ export const PostDetail = () => {
             ></Textarea>
           </div>
         </div>
-        <div className="my-2 flex justify-end">
+        <div className="mt-2 mb-4 flex justify-end">
           <>
             <Button className="bg-[#1a8cd8] rounded-full hover:bg-white hover:text-black">
               Reply
@@ -109,53 +109,56 @@ export const PostDetail = () => {
           </>
         </div>
       </div>
-      {data?.replies.map((val, idx) => (
-        <div
-          key={idx}
-          className="border border-b-0 border-l-0 border-r-0 border-gray-600 p-5 lg:p-2"
-        >
-          <>
-            <div className="flex flex-row gap-4 items-center">
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <h1>@{val.user.username}</h1>
-            </div>
-            <div className="flex flex-col ml-14">
-              <p className="">{val.reply}</p>
-              <div className="flex flex-row justify-between mt-10">
-                <div className="flex flex-row  items-center gap-2">
-                  <img
-                    src={chatBubble}
-                    alt="chat bubble"
-                    width={18}
-                    height={18}
-                  />
-                </div>
-                <div className="flex flex-row items-center gap-2">
-                  <img src={repost} alt="chat bubble" width={20} height={20} />
-                </div>
-                <div className="flex flex-row  items-center gap-2">
-                  <img src={love} alt="chat bubble" width={18} height={18} />
-                </div>
-                <div className="flex flex-row  items-center gap-2">
-                  <img src={chart} alt="chat bubble" width={18} height={18} />
-                </div>
-                <div className="flex flex-row  items-center gap-2">
-                  <img
-                    src={bookmark}
-                    alt="chat bubble"
-                    width={18}
-                    height={18}
-                  />
-                  <img src={share} alt="share" width={18} height={18} />
+
+      <div className="flex flex-col justify-center items-center w-full">
+        {data?.replies.map((val, idx) => (
+          <div
+            key={idx}
+            className="border border-b-0 border-l-1 border-r-1 border-gray-600 p-4 w-1/2"
+          >
+            <>
+              <div className="flex flex-row gap-4 items-center">
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <h1>@{val.user.username}</h1>
+              </div>
+              <div className="flex flex-col ml-14">
+                <p className="">{val.reply}</p>
+                <div className="flex flex-row justify-between mt-10">
+                  <div className="flex flex-row  items-center gap-2">
+                    <img
+                      src={chatBubble}
+                      alt="chat bubble"
+                      width={18}
+                      height={18}
+                    />
+                  </div>
+                  <div className="flex flex-row items-center gap-2">
+                    <img src={repost} alt="chat bubble" width={20} height={20} />
+                  </div>
+                  <div className="flex flex-row  items-center gap-2">
+                    <img src={love} alt="chat bubble" width={18} height={18} />
+                  </div>
+                  <div className="flex flex-row  items-center gap-2">
+                    <img src={chart} alt="chat bubble" width={18} height={18} />
+                  </div>
+                  <div className="flex flex-row  items-center gap-2">
+                    <img
+                      src={bookmark}
+                      alt="chat bubble"
+                      width={18}
+                      height={18}
+                    />
+                    <img src={share} alt="share" width={18} height={18} />
+                  </div>
                 </div>
               </div>
-            </div>
-          </>
-        </div>
-      ))}
+            </>
+          </div>
+        ))}
+      </div>
     </main>
   );
 };

@@ -10,20 +10,22 @@ export const SkeletonPosts = ({ data }: Props) => {
         <>
             {data ? (
                 <>
-                    {Array.from({ length: data.length }).map((_, index) => (
-                        <div
-                            key={index}
-                            className="flex flex-col border border-gray-600 border-t-0 border-l-0 border-r-0 border-b-1 p-5 lg:p-2"
-                        >
-                            <div className="flex flex-row gap-2">
-                                <Skeleton className="h-12 w-12 rounded-full" />
-                                <div className="flex flex-col justify-center">
-                                    <Skeleton className="h-4 w-[250px] mb-2" />
-                                    <Skeleton className="h-4 w-[200px]" />
+                    <div className="flex flex-col w-1/2">
+                        {Array.from({ length: data.length }).map((_, index) => (
+                            <div
+                                key={index}
+                                className="border border-gray-600 border-t-0 border-l-1 border-r-1 border-b-1 p-4 "
+                            >
+                                <div className="flex flex-row gap-2">
+                                    <Skeleton className="h-12 w-12 rounded-full" />
+                                    <div className="flex flex-col justify-center">
+                                        <Skeleton className="h-4 w-[250px] mb-2" />
+                                        <Skeleton className="h-4 w-[200px]" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </>
             ) : null}
 
