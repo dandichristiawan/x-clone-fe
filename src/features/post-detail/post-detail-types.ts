@@ -19,4 +19,5 @@ interface Replies {
         fullname: string
     }
     reply: string
+    createdAt: string
 }

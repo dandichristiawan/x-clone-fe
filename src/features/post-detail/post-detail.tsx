@@ -10,13 +10,19 @@ import { PropsData } from './post-detail-types';
 import { Separator } from '@radix-ui/react-separator';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { twitterTimestamp, formatDateList } from '@/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { CreateReplyComponent } from './create-reply/reply';
+import Cookies from 'js-cookie';
 
 export const PostDetail = () => {
   const { id } = useParams();
 
   const [data, setData] = React.useState<PropsData>();
   const [loading, setLoading] = React.useState<boolean>(false);
+
+  const [createReply, setCreateReply] = React.useState<string>('');
+  const [loadingReply, setLoadingReply] = React.useState<boolean>(false);
 
   async function getSingle() {
     setLoading(true);
@@ -39,9 +45,39 @@ export const PostDetail = () => {
     }
   }
 
+  async function reply(reply: string) {
+    setLoadingReply(true);
+    try {
+      const res = await fetch(
+        `http://192.168.1.153:3000/api/post/${id}/reply`,
+        {
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Cookies.get('token')}`,
+          },
+          method: 'POST',
+          body: JSON.stringify({ reply }),
+        }
+      );
+      if (!res.ok) {
+        throw new Error('Something went wrong!');
+      }
+      setLoadingReply(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   React.useEffect(() => {
     getSingle();
   }, []);
+
+  const onCreateReply = async () => {
+    await reply(createReply);
+    setCreateReply('');
+    await getSingle();
+  };
 
   return (
     <div className="flex flex-col items-center justify-start text-white">
@@ -57,13 +93,14 @@ export const PostDetail = () => {
           </div>
         </div>
         <p className="my-4">{data?.content}</p>
-        <p>{data?.createdAt}</p>
+        <p className="text-gray-500">{twitterTimestamp(data?.createdAt)}</p>
 
         <Separator className="my-4 border border-gray-600 border-1" />
         <div className="flex flex-row gap-2">
           <img src={chart} alt="chat bubble" width={18} height={18} />
           <p className="text-gray-500">View post engagements</p>
         </div>
+
         <Separator className="my-4 border border-gray-600" />
         {data ? (
           <div className="flex flex-row justify-between">
@@ -90,34 +127,20 @@ export const PostDetail = () => {
             </div>
           </div>
         ) : null}
-
-        <Separator className="my-4 border border-gray-600" />
-        <div className="flex flex-col">
-          <div className="flex flex-row gap-4">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <Textarea
-              className="border-none bg-black"
-              placeholder="Post your reply"
-            ></Textarea>
-          </div>
-        </div>
-        <div className="mt-2 mb-4 flex justify-end">
-          <>
-            <Button className="bg-[#1a8cd8] rounded-full hover:bg-white hover:text-black">
-              Reply
-            </Button>
-          </>
-        </div>
       </div>
+
+      <CreateReplyComponent
+        onChangeVal={setCreateReply}
+        onCreateReply={onCreateReply}
+        val={createReply}
+        loading={loadingReply}
+      />
 
       <div className="flex flex-col justify-center items-center w-full">
         {data?.replies.map((val, idx) => (
           <div
             key={idx}
-            className="border border-b-0 border-l-1 border-r-1 border-gray-600 p-4 w-2/5"
+            className="border border-b-1 border-l-1 border-r-1 border-gray-600 p-4 w-2/5"
           >
             <>
               <div className="flex flex-row gap-4 items-start">
@@ -128,11 +151,15 @@ export const PostDetail = () => {
                 <div className="flex flex-row gap-2">
                   <h1 className="font-bold">{val.user.fullname}</h1>
                   <p className="text-gray-500">@{val.user.username}</p>
+                  <p className="text-gray-500">&middot;</p>
+                  <p className="text-gray-500">
+                    {formatDateList(val.createdAt)}
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col ml-14">
                 <p className="">{val.reply}</p>
-                <div className="flex flex-row justify-between mt-10">
+                <div className="flex flex-row justify-between mt-7">
                   <div className="flex flex-row  items-center gap-2">
                     <img
                       src={chatBubble}

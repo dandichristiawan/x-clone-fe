@@ -7,6 +7,7 @@ import share from '@/assets/share.svg';
 import chatBubble from '@/assets/chatbubble.svg';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Link } from 'react-router-dom';
+import { formatDateList } from '@/lib/utils';
 
 type Props = {
   data: PropsData[] | undefined;
@@ -30,7 +31,11 @@ export const ListPostComponent = ({ data }: Props) => {
                 <div className="flex flex-col w-full">
                   <div className="flex flex-row gap-2">
                     <h1 className="font-semibold">{i.user.fullname}</h1>
-                    <p className='text-gray-500'>@{i.user.username}</p>
+                    <p className="text-gray-500">@{i.user.username}</p>
+                    <p className='text-gray-500'>&middot;</p>
+                    <p className="text-gray-500">
+                      {formatDateList(i.createdAt)}
+                    </p>
                   </div>
                   <p>{i.content}</p>
                   <div className="flex flex-row justify-between mt-5 w-full">
