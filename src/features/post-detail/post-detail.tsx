@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 import love from '@/assets/love.svg';
 import chart from '@/assets/chart.svg';
 import repost from '@/assets/repost.svg';
@@ -8,12 +9,10 @@ import chatBubble from '@/assets/chatbubble.svg';
 import { useParams } from 'react-router-dom';
 import { PropsData } from './post-detail-types';
 import { Separator } from '@radix-ui/react-separator';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { twitterTimestamp, formatDateList } from '@/lib/utils';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { twitterTimestamp } from '@/lib/utils';
 import { CreateReplyComponent } from './create-reply/reply';
-import Cookies from 'js-cookie';
+import { ListReplyComponent } from './list-reply/list';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export const PostDetail = () => {
   const { id } = useParams();
@@ -81,7 +80,7 @@ export const PostDetail = () => {
 
   return (
     <div className="flex flex-col items-center justify-start text-white">
-      <div className="border border-gray-600 border-t-0 flex flex-col w-2/5 p-5">
+      <div className="border border-gray-600 border-t-0 flex flex-col w-2/5 p-5 m">
         <div className="flex flex-row gap-4 items-center">
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
@@ -128,7 +127,7 @@ export const PostDetail = () => {
           </div>
         ) : null}
       </div>
-
+      
       <CreateReplyComponent
         onChangeVal={setCreateReply}
         onCreateReply={onCreateReply}
@@ -136,67 +135,7 @@ export const PostDetail = () => {
         loading={loadingReply}
       />
 
-      <div className="flex flex-col justify-center items-center w-full">
-        {data?.replies.map((val, idx) => (
-          <div
-            key={idx}
-            className="border border-b-1 border-l-1 border-r-1 border-gray-600 p-4 w-2/5"
-          >
-            <>
-              <div className="flex flex-row gap-4 items-start">
-                <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <div className="flex flex-row gap-2">
-                  <h1 className="font-bold">{val.user.fullname}</h1>
-                  <p className="text-gray-500">@{val.user.username}</p>
-                  <p className="text-gray-500">&middot;</p>
-                  <p className="text-gray-500">
-                    {formatDateList(val.createdAt)}
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col ml-14">
-                <p className="">{val.reply}</p>
-                <div className="flex flex-row justify-between mt-7">
-                  <div className="flex flex-row  items-center gap-2">
-                    <img
-                      src={chatBubble}
-                      alt="chat bubble"
-                      width={18}
-                      height={18}
-                    />
-                  </div>
-                  <div className="flex flex-row items-center gap-2">
-                    <img
-                      src={repost}
-                      alt="chat bubble"
-                      width={20}
-                      height={20}
-                    />
-                  </div>
-                  <div className="flex flex-row  items-center gap-2">
-                    <img src={love} alt="chat bubble" width={18} height={18} />
-                  </div>
-                  <div className="flex flex-row  items-center gap-2">
-                    <img src={chart} alt="chat bubble" width={18} height={18} />
-                  </div>
-                  <div className="flex flex-row  items-center gap-2">
-                    <img
-                      src={bookmark}
-                      alt="chat bubble"
-                      width={18}
-                      height={18}
-                    />
-                    <img src={share} alt="share" width={18} height={18} />
-                  </div>
-                </div>
-              </div>
-            </>
-          </div>
-        ))}
-      </div>
+      <ListReplyComponent data={data?.replies} />
     </div>
   );
 };

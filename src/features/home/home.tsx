@@ -1,9 +1,10 @@
 import React from 'react';
 import Cookies from 'js-cookie';
+import { SkeletonPosts } from './list-post/skeleton';
 import { PropsData } from '@/features/home/home-types';
 import { ListPostComponent } from '@/features/home/list-post/list';
 import { CreatePostComponent } from '@/features/home/create-post/post';
-import { SkeletonPosts } from './list-post/skeleton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export const Home = () => {
   const isTokenExist = Cookies.get('token');
@@ -67,7 +68,29 @@ export const Home = () => {
 
   return (
     <div className="text-white flex flex-col justify-center items-center w-full">
-      {/* <nav className="bg-blue-600">asd</nav> */}
+      {/* <nav className="bg-black p-2 border border-gray-500 border-t-0 border-b-1 w-2/5 sticky top-0 flex flex-row justify-between z-50"> */}
+        <Tabs defaultValue="foryou" className="">
+          <TabsList className="grid grid-cols-2 w-full">
+            <TabsTrigger
+              className="bg-black text-white focus:outline-none"
+              value="foryou"
+            >
+              For you
+            </TabsTrigger>
+            <TabsTrigger
+              className="bg-black text-white focus:outline-none"
+              value="following"
+            >
+              Following
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+      {/* </nav> */}
+
+      {/* <TabsContent value="account">
+        Make changes to your account here.
+      </TabsContent>
+      <TabsContent value="password">Change your password here.</TabsContent> */}
       {isTokenExist ? (
         <>
           <CreatePostComponent

@@ -11,7 +11,7 @@ export interface PropsData {
     createdAt: string
 }
 
-interface Replies {
+export interface Replies {
     _id: string
     user: {
         _id: string

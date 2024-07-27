@@ -17,11 +17,10 @@ export const ListPostComponent = ({ data }: Props) => {
   return (
     <>
       <div className="flex flex-col w-2/5">
-        {data?.map((i) => (
+        {data?.map((i, index) => (
           <Link to={`/post/${i._id}`}>
             <div
-              key={i._id}
-              className="border border-gray-600 border-b-1 border-l-1 border-r-1 border-t-0 p-4"
+              className={`border border-gray-600 border-b-1 border-l-1 border-r-1 border-t-0 p-4`}
             >
               <div className="flex flex-row w-full gap-2">
                 <Avatar>
@@ -32,7 +31,7 @@ export const ListPostComponent = ({ data }: Props) => {
                   <div className="flex flex-row gap-2">
                     <h1 className="font-semibold">{i.user.fullname}</h1>
                     <p className="text-gray-500">@{i.user.username}</p>
-                    <p className='text-gray-500'>&middot;</p>
+                    <p className="text-gray-500">&middot;</p>
                     <p className="text-gray-500">
                       {formatDateList(i.createdAt)}
                     </p>
