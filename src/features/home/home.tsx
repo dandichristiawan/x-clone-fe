@@ -2,9 +2,9 @@ import React from 'react';
 import Cookies from 'js-cookie';
 import { SkeletonPosts } from './list-post/skeleton';
 import { PropsData } from '@/features/home/home-types';
+import { NavbarHome } from '@/components/Navbar/NavbarHome';
 import { ListPostComponent } from '@/features/home/list-post/list';
 import { CreatePostComponent } from '@/features/home/create-post/post';
-import { Button } from '@/components/ui/button';
 
 export const Home = () => {
   const isTokenExist = Cookies.get('token');
@@ -68,19 +68,7 @@ export const Home = () => {
 
   return (
     <div className="text-white flex flex-col justify-center items-center w-full">
-      <nav className="bg-black p-2 border border-gray-500 border-t-0 border-b-1 w-2/5 sticky top-0 flex flex-row justify-between z-50 opacity-70">
-        <div className=" w-1/2 items-center flex justify-center">
-          <Button variant="ghost">For you</Button>
-        </div>
-        <div className=" w-1/2 items-center flex justify-center">
-          <Button variant="ghost">Following</Button>
-        </div>
-      </nav>
-
-      {/* <TabsContent value="account">
-        Make changes to your account here.
-      </TabsContent>
-      <TabsContent value="password">Change your password here.</TabsContent> */}
+      <NavbarHome />
       {isTokenExist ? (
         <>
           <CreatePostComponent

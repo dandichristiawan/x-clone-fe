@@ -17,7 +17,7 @@ export const ListPostComponent = ({ data }: Props) => {
   return (
     <>
       <div className="flex flex-col w-2/5">
-        {data?.map((i, index) => (
+        {data?.map((i) => (
           <Link to={`/post/${i._id}`}>
             <div
               className={`border border-gray-600 border-b-1 border-l-1 border-r-1 border-t-0 p-4`}
