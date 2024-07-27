@@ -80,3 +80,24 @@ function formatDateWithYear(isoString: string | undefined) {
   const year = date.getFullYear();
   return `${month} ${day}, ${year}`;
 }
+
+export function formatDateJoined(isoString: string | undefined) {
+  const date = new Date(isoString ?? '');
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const month = monthNames[date.getMonth()];
+  const year = date.getFullYear();
+  return `${month} ${year}`;
+}

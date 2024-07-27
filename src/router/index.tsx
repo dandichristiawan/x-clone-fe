@@ -29,7 +29,7 @@ const Routes = () => {
       element: <PostPage />,
     },
     {
-      path: '/profile',
+      path: '/user/:username',
       element: <ProfilePage />,
     },
   ];
