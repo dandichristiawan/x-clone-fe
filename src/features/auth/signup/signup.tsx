@@ -1,26 +1,16 @@
-import React from 'react';
 import { Button } from '@/components/ui/button';
-import { RegisterApi } from '@/api';
 import { useNavigate } from 'react-router-dom';
 import { TypographyP } from '@/components/typography/typographyP';
 import { TypographyH1 } from '@/components/typography/typographyH1';
 import { InputWithLabel } from '@/components/InputWithLabel/input-with-label';
+import { useRegister } from '@/hooks/authentication';
 
 export const SignUp = () => {
   const navTo = useNavigate();
-  const [registerCredentials, setRegisterCredentials] = React.useState({
-    fullname: '',
-    username: '',
-    email: '',
-    password: '',
-  });
-  const handleValChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setRegisterCredentials((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  
+  const { isLoading, registerCredentials, handleValChange, RegisterApi } =
+    useRegister();
+
   const onRegister = async () => {
     await RegisterApi(registerCredentials);
   };
