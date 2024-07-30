@@ -8,3 +8,22 @@ export interface PropsData {
   following: string[]
   posts: string[]
 }
+
+export interface Posts {
+  _id: string;
+  content: string
+  likes: number
+  replies: Replies[]
+  createdAt: string
+}
+
+interface Replies {
+  _id: string
+  user: {
+    _id: string
+    username: string
+    fullname: string
+  }
+  reply: string
+  createdAt: string
+}

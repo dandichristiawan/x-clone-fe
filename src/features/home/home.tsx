@@ -18,7 +18,7 @@ export const Home = () => {
   async function get() {
     setLoadingData(true);
     try {
-      const res = await fetch('http://192.168.1.153:3000/api/getPosts', {
+      const res = await fetch('http://192.168.103.56:3000/api/getPosts', {
         mode: 'cors',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -39,7 +39,7 @@ export const Home = () => {
   async function tweet(content: string) {
     setLoadingPost(true);
     try {
-      const res = await fetch('http://192.168.1.153:3000/api/createPost', {
+      const res = await fetch('http://192.168.103.56:3000/api/createPost', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${Cookies.get('token')}`,

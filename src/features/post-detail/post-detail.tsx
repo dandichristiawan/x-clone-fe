@@ -19,7 +19,7 @@ export const PostDetail = () => {
   async function getSingle() {
     setLoading(true);
     try {
-      const res = await fetch(`http://192.168.1.153:3000/api/post/${id}`, {
+      const res = await fetch(`http://192.168.103.56:3000/api/post/${id}`, {
         mode: 'cors',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -41,7 +41,7 @@ export const PostDetail = () => {
     setLoadingReply(true);
     try {
       const res = await fetch(
-        `http://192.168.1.153:3000/api/post/${id}/reply`,
+        `http://192.168.103.56:3000/api/post/${id}/reply`,
         {
           mode: 'cors',
           headers: {
