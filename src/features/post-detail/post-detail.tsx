@@ -3,25 +3,30 @@ import { PostUserComponent } from './post-user/user';
 import { ListReplyComponent } from './list-reply/list';
 import { CreateReplyComponent } from './create-reply/reply';
 import { NavbarDetail } from '@/components/Navbar/NavbarDetail';
-import { useGetPostDetail, useReplyPost } from '@/hooks/post-detail.hooks';
-import { SpinnerXlCentered } from '@/components/Spinner/xl-centered';
+import {
+  useGetPostDetail,
+  useGetPostReplies,
+  useReplyPost,
+} from '@/hooks/post-detail.hooks';
 
 export const PostDetail = () => {
   const { id } = useParams();
 
-  const { data, isLoading, refetch } = useGetPostDetail(id);
+  const { data, refetchPostDetail } = useGetPostDetail(id);
 
-  const { createReply, loadingReply, reply, setCreateReply } = useReplyPost(id);
+  const { createReply, loadingReply, reply, setCreateReply, progress } =
+    useReplyPost(id);
+
+  const { replies, refetchPostReplies } = useGetPostReplies(id);
 
   const onCreateReply = async () => {
     await reply(createReply);
     setCreateReply('');
-    refetch();
+    setTimeout(() => {
+      refetchPostDetail();
+      refetchPostReplies();
+    }, 1000);
   };
-
-  if (isLoading) {
-    return <SpinnerXlCentered />;
-  }
 
   if (data) {
     return (
@@ -31,12 +36,13 @@ export const PostDetail = () => {
           <PostUserComponent data={data} />
         </div>
         <CreateReplyComponent
+          progress={progress}
           onChangeVal={setCreateReply}
           onCreateReply={onCreateReply}
           val={createReply}
           loading={loadingReply}
         />
-        <ListReplyComponent data={data?.replies} />
+        <ListReplyComponent replies={replies} />
       </div>
     );
   }

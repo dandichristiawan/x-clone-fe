@@ -7,7 +7,7 @@ export interface PropsData {
     }
     content: string
     likes: number
-    replies: Replies[]
+    replies: string[]
     createdAt: string
 }
 

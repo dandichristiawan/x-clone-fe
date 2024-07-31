@@ -1,10 +1,9 @@
 import React from 'react';
 import Cookies from 'js-cookie';
-import { PropsData } from '@/features/post-detail/post-detail-types';
+import { PropsData, Replies } from '@/features/post-detail/post-detail-types';
 
 export const useGetPostDetail = (id: string | undefined) => {
   const [data, setData] = React.useState<PropsData>();
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   async function GetPostDetail(id: string | undefined) {
     try {
@@ -18,16 +17,12 @@ export const useGetPostDetail = (id: string | undefined) => {
       }
       const data = await res.json();
       setData(data);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
     } catch (error) {
       console.log(error);
     }
   }
 
-  const refetch = () => {
-    setIsLoading(true);
+  const refetchPostDetail = () => {
     GetPostDetail(id);
   };
 
@@ -37,16 +32,55 @@ export const useGetPostDetail = (id: string | undefined) => {
     }
   }, [id]);
 
-  return { data, isLoading, refetch };
+  return { data, refetchPostDetail };
+};
+
+export const useGetPostReplies = (id: string | undefined) => {
+  const [replies, setReplies] = React.useState<Replies[]>();
+
+  async function GetPostReplies(id: string | undefined) {
+    try {
+      const res = await fetch(
+        `http://192.168.1.153:3000/api/post/${id}/replies`,
+        {
+          mode: 'cors',
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+      if (!res.ok) {
+        throw new Error('Something went wrong!');
+      }
+      const data = await res.json();
+      setReplies(data.replies);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const refetchPostReplies = () => {
+    GetPostReplies(id);
+  };
+
+  React.useEffect(() => {
+    if (id) {
+      GetPostReplies(id);
+    }
+  }, [id]);
+
+  return { replies, refetchPostReplies };
 };
 
 export const useReplyPost = (id: string | undefined) => {
+  const [progress, setProgress] = React.useState<number>(0);
   const [createReply, setCreateReply] = React.useState<string>('');
   const [loadingReply, setLoadingReply] = React.useState<boolean>(false);
 
   async function reply(reply: string) {
     setLoadingReply(true);
+    setProgress(25);
     try {
+      setProgress(45);
       const res = await fetch(
         `http://192.168.1.153:3000/api/post/${id}/reply`,
         {
@@ -59,14 +93,19 @@ export const useReplyPost = (id: string | undefined) => {
           body: JSON.stringify({ reply }),
         }
       );
+      setProgress(70);
       if (!res.ok) {
         throw new Error('Something went wrong!');
       }
-      setLoadingReply(false);
+
+      setProgress(100);
+      setTimeout(() => {
+        setLoadingReply(false);
+      }, 1000);
     } catch (error) {
       console.error(error);
     }
   }
 
-  return { createReply, setCreateReply, loadingReply, reply };
+  return { createReply, setCreateReply, loadingReply, reply, progress };
 };

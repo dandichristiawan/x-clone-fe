@@ -1,11 +1,12 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Separator } from '@/components/ui/separator';
+// import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 type Props = {
   val: string;
+  progress: number;
   loading: boolean;
   onCreateReply: () => void;
   onChangeVal: (val: string) => void;
@@ -13,12 +14,16 @@ type Props = {
 
 export const CreateReplyComponent = ({
   val,
+  progress,
   loading,
   onChangeVal,
   onCreateReply,
 }: Props) => {
   return (
     <>
+      {loading && (
+        <progress className="custom-progress" value={progress} max={100} />
+      )}
       <div className="border border-gray-600 border-r-1 border-t-0 border-l-1 flex flex-row p-2 gap-2 w-2/5">
         <div className="flex flex-col w-full p-4">
           <div className="flex flex-row gap-4">
