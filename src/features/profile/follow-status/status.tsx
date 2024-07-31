@@ -37,7 +37,7 @@ export const FollowStatusComponent = ({ userId, refetchProfile }: Props) => {
                         <>
                             <Button
                                 onClick={handleUnfollow}
-                                className='bg-white text-black font-bold hover:bg-gray-400 rounded-full absolute left-[430px] bottom-3'
+                                className='bg-white w-3/4 text-black font-bold hover:bg-gray-400 rounded-full absolute left-[430px] xl:left-[632px] bottom-3'
                             >
                                 Unfollow
                             </Button>
@@ -46,7 +46,7 @@ export const FollowStatusComponent = ({ userId, refetchProfile }: Props) => {
                         <>
                             <Button
                                 onClick={handleFollow}
-                                className='bg-white text-black font-bold hover:bg-gray-400 rounded-full absolute left-[430px] bottom-3'
+                                className='bg-white w-3/4 text-black font-bold hover:bg-gray-400 rounded-full absolute left-[430px] xl:left-[632px] bottom-3'
                             >
                                 Follow
                             </Button>

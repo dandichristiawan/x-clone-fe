@@ -8,7 +8,7 @@ export const useGetPostDetail = (id: string | undefined) => {
 
   async function GetPostDetail(id: string | undefined) {
     try {
-      const res = await fetch(`http://192.168.103.56:3000/api/post/${id}`, {
+      const res = await fetch(`http://192.168.1.153:3000/api/post/${id}`, {
         mode: 'cors',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -48,7 +48,7 @@ export const useReplyPost = (id: string | undefined) => {
     setLoadingReply(true);
     try {
       const res = await fetch(
-        `http://192.168.103.56:3000/api/post/${id}/reply`,
+        `http://192.168.1.153:3000/api/post/${id}/reply`,
         {
           mode: 'cors',
           headers: {

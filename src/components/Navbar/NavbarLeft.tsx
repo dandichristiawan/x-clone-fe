@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { PostModal } from '../PostModal/post-modal';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-export const NavbarLeft = () => {
+type Props = {
+  refetch?: () => void | undefined
+};
+
+export const NavbarLeft = ({ refetch }: Props) => {
   const isTokenExist = Cookies.get('token');
 
   const onLogout = () => {
@@ -131,15 +135,21 @@ export const NavbarLeft = () => {
         <div className="flex justify-start space-y-2 h-1/4 ">
           {isTokenExist ? (
             <div className="flex flex-col justify-end gap-4 w-full">
-              <PostModal />
+              <PostModal refetch={refetch} />
               <div className="flex flex-row gap-2 items-center">
                 <Avatar>
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col p-2">
-                  <p className="text-white font-bold">{Cookies.get('fullname')}</p>
-                  <p className="text-gray-500">@{Cookies.get('username')}</p>
+                  <p className="text-white font-bold">
+                    {Cookies.get('fullname')}
+                  </p>
+                  <Link to={`/user/${Cookies.get('username')}`}>
+                    <p className="text-gray-500 hover:underline">
+                      @{Cookies.get('username')}
+                    </p>
+                  </Link>
                 </div>
               </div>
             </div>

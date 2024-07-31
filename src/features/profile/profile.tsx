@@ -8,19 +8,13 @@ import { Button } from '@/components/ui/button';
 import { ProfilePosts } from './profile-post/post';
 import { useGetProfile } from '@/hooks/user/profile.hooks';
 import { FollowStatusComponent } from './follow-status/status';
-import { SpinnerXlCentered } from '@/components/Spinner/xl-centered';
 
 export const Profile = () => {
-
   const { username } = useParams();
 
-  const { data, isLoading, refetchProfile } = useGetProfile(username);
+  const { data, refetchProfile } = useGetProfile(username);
 
   const [active, setActive] = React.useState<'post' | 'likes' | null>('post');
-
-  if (isLoading) {
-    return <SpinnerXlCentered />
-  }
 
   if (data) {
     return (
@@ -36,7 +30,10 @@ export const Profile = () => {
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <FollowStatusComponent refetchProfile={refetchProfile} userId={data._id} />
+              <FollowStatusComponent
+                refetchProfile={refetchProfile}
+                userId={data._id}
+              />
             </div>
             <div className="flex flex-col ">
               <p className="text-xl font-bold">{data.fullname}</p>
@@ -61,10 +58,11 @@ export const Profile = () => {
               <Button
                 onClick={() => setActive(active === 'post' ? 'post' : 'post')}
                 variant="ghost"
-                className={`text-[#71767B] hover:bg-transparent hover:text-[#71767B] ${active === 'post'
-                  ? 'underline underline-offset-8 text-white underline-blue'
-                  : ''
-                  } `}
+                className={`text-[#71767B] hover:bg-transparent hover:text-[#71767B] ${
+                  active === 'post'
+                    ? 'underline underline-offset-8 text-white underline-blue'
+                    : ''
+                } `}
               >
                 Post
               </Button>
@@ -73,10 +71,11 @@ export const Profile = () => {
                   setActive(active === 'likes' ? 'likes' : 'likes')
                 }
                 variant="ghost"
-                className={`text-[#71767B] hover:bg-transparent  ${active === 'likes'
-                  ? 'underline underline-offset-8 text-white underline-blue hover:text-[#71767B]'
-                  : ''
-                  }`}
+                className={`text-[#71767B] hover:bg-transparent  ${
+                  active === 'likes'
+                    ? 'underline underline-offset-8 text-white underline-blue hover:text-[#71767B]'
+                    : ''
+                }`}
               >
                 Likes
               </Button>

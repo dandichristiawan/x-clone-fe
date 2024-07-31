@@ -63,6 +63,45 @@
   }
 }
 
+.custom-progress {
+  @apply w-2/5 h-1 bg-gray-200 rounded-none overflow-hidden;
+  appearance: none; /* Remove default styling */
+}
+
+.custom-progress::-webkit-progress-bar {
+  background-color: transparent;
+}
+
+.custom-progress::-webkit-progress-value {
+  background-color: #1d9bf0; 
+  transition: width 1s ease; 
+}
+
+.custom-progress::-moz-progress-bar {
+  background-color: #1d9bf0; 
+  transition: width 1s ease;
+}
+
+.custom-progress-modal {
+  @apply w-full h-1.5 bg-gray-200 rounded-lg rounded-br-none rounded-bl-none overflow-hidden absolute -top-0.5;
+  appearance: none; /* Remove default styling */
+}
+
+.custom-progress-modal::-webkit-progress-bar {
+  background-color: transparent;
+}
+
+.custom-progress-modal::-webkit-progress-value {
+  background-color: #1d9bf0; 
+  transition: width 1s ease; 
+}
+
+.custom-progress-modal::-moz-progress-bar {
+  background-color: #1d9bf0; 
+  transition: width 1s ease;
+}
+
+
 #default-sidebar-right::-webkit-scrollbar {
   display: none;
 }
