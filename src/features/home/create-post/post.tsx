@@ -24,7 +24,7 @@ export const CreatePostComponent = ({ val, loading, onChangeVal, onCreatePost }:
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                         onChangeVal(e.target.value)
                     }
-                    className="border-none bg-black"
+                    className="border-none bg-black text-2xl text-white font-medium"
                     placeholder="What is happening?!"
                 />
                 <Separator className="my-4 border border-gray-600" />

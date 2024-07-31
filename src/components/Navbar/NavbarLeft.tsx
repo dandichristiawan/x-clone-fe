@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
+import { PostModal } from '../PostModal/post-modal';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
 
 export const NavbarLeft = () => {
   const isTokenExist = Cookies.get('token');
@@ -131,9 +131,7 @@ export const NavbarLeft = () => {
         <div className="flex justify-start space-y-2 h-1/4 ">
           {isTokenExist ? (
             <div className="flex flex-col justify-end gap-4 w-full">
-              <Button className="w-5/6 bg-[#1d9bf0] font-bold rounded-3xl mt-2 text-white p-2">
-                Post
-              </Button>
+              <PostModal />
               <div className="flex flex-row gap-2 items-center">
                 <Avatar>
                   <AvatarImage src="https://github.com/shadcn.png" />

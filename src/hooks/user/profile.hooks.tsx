@@ -2,13 +2,14 @@ import React from 'react';
 import { Posts, PropsData } from '@/features/profile/profile-types';
 
 export const useGetProfile = (username: string | undefined) => {
+
   const [data, setData] = React.useState<PropsData>();
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
-  async function getProfile(username: string) {
+  async function getProfile() {
     try {
       const res = await fetch(
-        `http://192.168.1.153:3000/api/user/${username}`,
+        `http://192.168.103.56:3000/api/user/${username}`,
         {
           mode: 'cors',
           method: 'GET',
@@ -24,16 +25,24 @@ export const useGetProfile = (username: string | undefined) => {
       setIsLoading(false);
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   }
 
-  React.useEffect(() => {
+  const refetchProfile = React.useCallback(() => {
     if (username) {
-      getProfile(username);
+      setIsLoading(true);
+      getProfile();
     }
   }, [username]);
 
-  return { data, isLoading };
+  React.useEffect(() => {
+    if (username) {
+      getProfile();
+    }
+  }, [username]);
+
+  return { data, isLoading, refetchProfile };
 };
 
 export const useGetProfilePost = (username: string | undefined) => {
@@ -43,7 +52,7 @@ export const useGetProfilePost = (username: string | undefined) => {
   async function getProfilePost(username: string) {
     try {
       const res = await fetch(
-        `http://192.168.1.153:3000/api/userPost/${username}`,
+        `http://192.168.103.56:3000/api/userPost/${username}`,
         {
           mode: 'cors',
           method: 'GET',

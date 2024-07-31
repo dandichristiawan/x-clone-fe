@@ -1,9 +1,10 @@
 import Cookies from 'js-cookie';
-import { SkeletonPosts } from './list-post/skeleton';
+import { SpinnerXl } from '@/components/Spinner/xl';
 import { NavbarHome } from '@/components/Navbar/NavbarHome';
+import { useCreatePost, useGetAllPost } from '@/hooks/home.hooks';
 import { ListPostComponent } from '@/features/home/list-post/list';
 import { CreatePostComponent } from '@/features/home/create-post/post';
-import { useCreatePost, useGetAllPost } from '@/hooks/home';
+
 
 export const Home = () => {
   const isTokenExist = Cookies.get('token');
@@ -32,7 +33,7 @@ export const Home = () => {
         </>
       ) : null}
       {loadingData ? (
-        <SkeletonPosts data={data} />
+        <SpinnerXl />
       ) : (
         <ListPostComponent data={data} />
       )}

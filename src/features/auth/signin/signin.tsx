@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { TypographyP } from '@/components/typography/typographyP';
 import { TypographyH1 } from '@/components/typography/typographyH1';
 import { InputWithLabel } from '@/components/InputWithLabel/input-with-label';
-import { useLogin } from '@/hooks/authentication';
+import { useLogin } from '@/hooks/authentication.hooks';
+import TopBarProgress from 'react-topbar-progress-indicator';
 
 export const SignIn = () => {
   const navTo = useNavigate();
@@ -16,6 +17,7 @@ export const SignIn = () => {
 
   return (
     <>
+      {isLoading && <TopBarProgress />}
       <main className="bg-black min-h-dvh w-full flex justify-center items-center">
         <div className="p-5 flex flex-col gap-4">
           <TypographyH1 text="Sign in to your X account" />

@@ -3,7 +3,8 @@ import { PostUserComponent } from './post-user/user';
 import { ListReplyComponent } from './list-reply/list';
 import { CreateReplyComponent } from './create-reply/reply';
 import { NavbarDetail } from '@/components/Navbar/NavbarDetail';
-import { useGetPostDetail, useReplyPost } from '@/hooks/post-detail';
+import { useGetPostDetail, useReplyPost } from '@/hooks/post-detail.hooks';
+import { SpinnerXlCentered } from '@/components/Spinner/xl-centered';
 
 export const PostDetail = () => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ export const PostDetail = () => {
   };
 
   if (isLoading) {
-    return <div className="text-white">Loading...</div>;
+    return <SpinnerXlCentered />;
   }
 
   if (data) {

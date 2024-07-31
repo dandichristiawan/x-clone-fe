@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from "sonner"
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,9 +30,9 @@ export const useLogin = () => {
   };
 
   async function LoginApi(formData: FormDataLogin) {
-    setIsLoading(false);
+    setIsLoading(true);
     try {
-      const response = await fetch('http://192.168.1.153:3000/api/login', {
+      const response = await fetch('http://192.168.103.56:3000/api/login', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify(formData),
@@ -43,9 +44,10 @@ export const useLogin = () => {
 
       const data = await response.json();
       Cookies.set('token', data.token, { expires: 1 / 24 });
+      Cookies.set('userId', data.user.id, { expires: 1 / 24 });
       Cookies.set('fullname', data.user.fullname, { expires: 1 / 24 });
       Cookies.set('username', data.user.username, { expires: 1 / 24 });
-      setIsLoading(true);
+      setIsLoading(false);
       navTo('/home');
     } catch (error) {
       console.error(error);
@@ -76,7 +78,7 @@ export const useRegister = () => {
   async function RegisterApi(formData: FormDataRegister): Promise<void> {
     setIsLoading(true);
     try {
-      const response = await fetch('http://192.168.1.153:3000/api/signup', {
+      const response = await fetch('http://192.168.103.56:3000/api/signup', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify(formData),
@@ -86,6 +88,7 @@ export const useRegister = () => {
         throw new Error('Something went wrong');
       }
       setIsLoading(false);
+      toast("Your account has been successfully created.")
     } catch (error) {
       console.error(error);
     }

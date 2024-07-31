@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { TypographyP } from '@/components/typography/typographyP';
 import { TypographyH1 } from '@/components/typography/typographyH1';
 import { InputWithLabel } from '@/components/InputWithLabel/input-with-label';
-import { useRegister } from '@/hooks/authentication';
+import { useRegister } from '@/hooks/authentication.hooks';
 
 export const SignUp = () => {
   const navTo = useNavigate();
