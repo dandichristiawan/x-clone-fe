@@ -1,13 +1,15 @@
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { useRegister } from '@/hooks/authentication.hooks';
 import { TypographyP } from '@/components/typography/typographyP';
 import { TypographyH1 } from '@/components/typography/typographyH1';
 import { InputWithLabel } from '@/components/InputWithLabel/input-with-label';
-import { useRegister } from '@/hooks/authentication.hooks';
+import TopBarProgress from 'react-topbar-progress-indicator';
 
 export const SignUp = () => {
+
   const navTo = useNavigate();
-  
+
   const { isLoading, registerCredentials, handleValChange, RegisterApi } =
     useRegister();
 
@@ -17,6 +19,7 @@ export const SignUp = () => {
 
   return (
     <>
+      {isLoading && <TopBarProgress />}
       <main className="bg-black min-h-dvh w-full flex justify-center items-center">
         <div className="p-5 flex flex-col gap-4">
           <TypographyH1 text="Create your account" />

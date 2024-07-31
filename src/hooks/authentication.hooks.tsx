@@ -1,7 +1,8 @@
 import React from 'react';
-import { toast } from "sonner"
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from "@/components/ui/use-toast"
+import { ToastAction } from '@radix-ui/react-toast';
 
 interface FormDataLogin {
   email: string;
@@ -58,6 +59,8 @@ export const useLogin = () => {
 };
 
 export const useRegister = () => {
+  const navTo = useNavigate();
+  const { toast } = useToast()
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const [registerCredentials, setRegisterCredentials] = React.useState({
@@ -88,7 +91,17 @@ export const useRegister = () => {
         throw new Error('Something went wrong');
       }
       setIsLoading(false);
-      toast("Your account has been successfully created.")
+      toast({
+        title: "Your account have been successfully created!",
+        action: <ToastAction
+          altText='Login'
+          onClick={() => navTo('/login')}
+          className='bg-white text-black font-bold rounded-3xl p-2 w-3/12'
+        >
+          Login
+        </ToastAction>,
+        className: "bg-[#1d9bf0] border-none rounded-lg text-white",
+      });
     } catch (error) {
       console.error(error);
     }
