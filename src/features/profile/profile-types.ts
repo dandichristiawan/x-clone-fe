@@ -4,9 +4,10 @@ export interface PropsData {
   email: string;
   fullname: string;
   createdAt: string
-  followers: string[]
-  following: string[]
-  posts: string[]
+  followers: number
+  following: number
+  posts: number
+  likes: number
 }
 
 export interface Posts {

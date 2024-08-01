@@ -7,7 +7,7 @@ export const useGetProfile = (username: string | undefined) => {
   async function getProfile() {
     try {
       const res = await fetch(
-        `http://192.168.103.56:3000/api/user/${username}`,
+        `http://192.168.1.153:3000/api/user/${username}`,
         {
           mode: 'cors',
           method: 'GET',
@@ -47,7 +47,7 @@ export const useGetProfilePost = (username: string | undefined) => {
   async function getProfilePost(username: string) {
     try {
       const res = await fetch(
-        `http://192.168.103.56:3000/api/userPost/${username}`,
+        `http://192.168.1.153:3000/api/userPost/${username}`,
         {
           mode: 'cors',
           method: 'GET',

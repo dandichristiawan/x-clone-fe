@@ -5,7 +5,7 @@ export const useFollowHook = () => {
 
     async function followUser(userIdToFollow: string) {
         try {
-            const res = await fetch('http://192.168.103.56:3000/api/followUser', {
+            const res = await fetch('http://192.168.1.153:3000/api/followUser', {
                 mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export const useFollowHook = () => {
 
     async function unfollowUser(userIdToUnfollow: string) {
         try {
-            const res = await fetch('http://192.168.103.56:3000/api/unfollowUser', {
+            const res = await fetch('http://192.168.1.153:3000/api/unfollowUser', {
                 mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export const useCheckFollowStatus = (userIdToCheck: string) => {
 
     async function isFollowing() {
         try {
-            const req = await fetch(`http://192.168.103.56:3000/api/check-follow-status?userIdToCheck=${userIdToCheck}`, {
+            const req = await fetch(`http://192.168.1.153:3000/api/check-follow-status?userIdToCheck=${userIdToCheck}`, {
                 mode: 'cors',
                 method: 'GET',
                 headers: {

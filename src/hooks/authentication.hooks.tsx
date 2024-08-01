@@ -33,7 +33,7 @@ export const useLogin = () => {
   async function LoginApi(formData: FormDataLogin) {
     setIsLoading(true);
     try {
-      const response = await fetch('http://192.168.103.56:3000/api/login', {
+      const response = await fetch('http://192.168.1.153:3000/api/login', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify(formData),
@@ -48,6 +48,8 @@ export const useLogin = () => {
       Cookies.set('userId', data.user.id, { expires: 1 / 24 });
       Cookies.set('fullname', data.user.fullname, { expires: 1 / 24 });
       Cookies.set('username', data.user.username, { expires: 1 / 24 });
+      Cookies.set('following', data.user.following, { expires: 1 / 24 });
+      Cookies.set('followers', data.user.followers, { expires: 1 / 24 });
       setIsLoading(false);
       navTo('/home');
     } catch (error) {
@@ -81,7 +83,7 @@ export const useRegister = () => {
   async function RegisterApi(formData: FormDataRegister): Promise<void> {
     setIsLoading(true);
     try {
-      const response = await fetch('http://192.168.103.56:3000/api/signup', {
+      const response = await fetch('http://192.168.1.153:3000/api/signup', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify(formData),

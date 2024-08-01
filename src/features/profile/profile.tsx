@@ -24,7 +24,7 @@ export const Profile = () => {
     return (
       <>
         <div className="text-white flex flex-col justify-center items-center w-full">
-          <NavbarProfile username={data.username} posts={data.posts.length} />
+          <NavbarProfile username={data.username} posts={data.posts} />
           <div className="bg-[#333639] h-48 w-full md:w-2/5 relative text-[#333639]">
             a
           </div>
@@ -52,11 +52,11 @@ export const Profile = () => {
             </div>
             <div className="flex flex-row gap-4">
               <div className="flex flex-row gap-2">
-                <p>{data.following.length}</p>
+                <p>{data.following}</p>
                 <p className="text-[#71767b]">Following</p>
               </div>
               <div className="flex flex-row gap-2">
-                <p>{data.followers.length}</p>
+                <p>{data.followers}</p>
                 <p className="text-[#71767b]">Followers</p>
               </div>
             </div>
