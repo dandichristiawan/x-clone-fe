@@ -64,7 +64,7 @@
 }
 
 .custom-progress {
-  @apply w-2/5 h-1 bg-gray-200 rounded-none overflow-hidden;
+  @apply w-full md:w-2/5 h-1 bg-gray-200 rounded-none overflow-hidden;
   appearance: none; /* Remove default styling */
 }
 

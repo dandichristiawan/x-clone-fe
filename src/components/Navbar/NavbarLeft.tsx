@@ -17,10 +17,10 @@ export const NavbarLeft = ({ refetch }: Props) => {
   return (
     <aside
       id="default-sidebar"
-      className="fixed top-0 left-16 2xl:left-60 z-40 sm:w-0 md:w-36 lg:w-[296px] 2xl:w-[312px]  h-screen transition-transform -translate-x-full sm:translate-x-0"
+      className="fixed top-0 left-16 2xl:left-60 z-40 md:w-36 lg:w-[296px] 2xl:w-[312px]  h-screen transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar"
     >
-      <div className="h-full px-3 py-4 flex flex-col bg-black dark:bg-gray-800">
+      <div className="h-full px-3 py-4 hidden md:flex flex-col bg-black dark:bg-gray-800">
         <div className="flex h-1/2 justify-start">
           <ul className="space-y-2 font-medium h-1/2 w-full">
             <li>

@@ -7,10 +7,10 @@ export const NavbarRight = () => {
   return (
     <aside
       id="default-sidebar-right"
-      className="fixed top-0 right-16 2xl:right-60 z-40 sm:w-0 md:w-36 lg:w-[295.5px] 2xl:w-[311px] h-screen transition-transform translate-x-full sm:translate-x-0 overflow-y-auto"
+      className="fixed top-0 right-16 2xl:right-60 z-40 md:w-36 lg:w-[295.5px] 2xl:w-[311px] h-screen transition-transform translate-x-full sm:translate-x-0 overflow-y-auto"
       aria-label="Sidebar"
     >
-      <div className="h-full px-3 py-4 bg-black dark:bg-gray-800">
+      <div className="h-full px-3 py-4 hidden md:flex flex-col bg-black dark:bg-gray-800">
         <div className="mb-4">
           <Input
             className="rounded-full text-white bg-[#202327] border-none focus:outline-none focus:border-none"

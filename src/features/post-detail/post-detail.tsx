@@ -32,7 +32,7 @@ export const PostDetail = () => {
     return (
       <div className="flex flex-col items-center justify-start text-white">
         <NavbarDetail />
-        <div className="border border-gray-600 border-t-0 flex flex-col w-2/5 p-5 m">
+        <div className="border border-gray-600 border-t-0 flex flex-col w-full md:w-2/5 p-5 m">
           <PostUserComponent data={data} />
         </div>
         <CreateReplyComponent

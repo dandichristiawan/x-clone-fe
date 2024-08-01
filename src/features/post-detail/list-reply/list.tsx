@@ -19,7 +19,7 @@ export const ListReplyComponent = ({ replies }: Props) => {
         {replies?.map((val, idx) => (
           <div
             key={idx}
-            className="border border-b-1 border-l-1 border-r-1 border-t-0 border-gray-600 p-4 w-2/5"
+            className="border border-b-1 border-l-1 border-r-1 border-t-0 border-gray-600 p-4 w-full md:w-2/5"
           >
             <>
               <div className="flex flex-row gap-4 items-start">

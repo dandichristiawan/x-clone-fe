@@ -24,7 +24,7 @@ export const ProfilePosts = ({ username, fullName }: Props) => {
     if (data)
         return (
             <>
-                <div className="w-2/5 flex flex-col">
+                <div className="w-full md:w-2/5 flex flex-col">
                     {data.map((val) => (
                         <div className=" border border-t-0 border-[#333639] p-4">
                             <div className="flex flex-row w-full gap-2">

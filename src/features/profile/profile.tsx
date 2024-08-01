@@ -21,10 +21,10 @@ export const Profile = () => {
       <>
         <div className="text-white flex flex-col justify-center items-center w-full">
           <NavbarProfile username={data.username} posts={data.posts.length} />
-          <div className="bg-[#333639] h-48 w-2/5 relative text-[#333639]">
+          <div className="bg-[#333639] h-48 w-full md:w-2/5 relative text-[#333639]">
             a
           </div>
-          <div className="bg-black w-2/5 p-4 pb-2 pt-20 relative border border-l-1 border-r-1 border-[#333639]">
+          <div className="bg-black w-full md:w-2/5 p-4 pb-2 pt-20 relative border border-l-1 border-r-1 border-[#333639]">
             <div className="absolute transform -translate-x-1/2 -top-16 left-20">
               <Avatar className="w-32 h-32 border-black border-4">
                 <AvatarImage src="https://github.com/shadcn.png" />

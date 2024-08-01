@@ -11,7 +11,7 @@ export const useGetAllPost = () => {
 
   async function get() {
     try {
-      const res = await fetch('http://192.168.1.153:3000/api/getPosts', {
+      const res = await fetch('http://192.168.103.56:3000/api/getPosts', {
         mode: 'cors',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -52,7 +52,7 @@ export const useCreatePost = () => {
     setProgress(25);
     try {
       setProgress(45);
-      const res = await fetch('http://192.168.1.153:3000/api/createPost', {
+      const res = await fetch('http://192.168.103.56:3000/api/createPost', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${Cookies.get('token')}`,

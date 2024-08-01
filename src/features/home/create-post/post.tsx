@@ -25,7 +25,7 @@ export const CreatePostComponent = ({
       {loading && (
         <progress className="custom-progress" value={progress} max={100} />
       )}
-      <div className="border border-gray-600 border-r-1 border-t-0 border-l-1 flex flex-row p-2 gap-2 w-2/5">
+      <div className="border border-gray-600 border-r-1 border-t-0 border-l-1 hidden md:flex flex-row p-2 gap-2 w-2/5">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
