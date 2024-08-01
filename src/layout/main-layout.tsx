@@ -1,6 +1,6 @@
 import React from 'react';
-import { NavbarLeft } from '@/components/Navbar/NavbarLeft';
-import { NavbarRight } from '@/components/Navbar/NavbarRight';
+import { NavbarLeft } from '@/components/Navbar/navbar-left';
+import { NavbarRight } from '@/components/Navbar/navbar-right';
 type Props = {
   children: React.ReactNode;
 };

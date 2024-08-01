@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { PostUserComponent } from './post-user/user';
 import { ListReplyComponent } from './list-reply/list';
 import { CreateReplyComponent } from './create-reply/reply';
-import { NavbarDetail } from '@/components/Navbar/NavbarDetail';
+import { NavbarDetail } from '@/components/Navbar/navbar-detail';
 import {
   useGetPostDetail,
   useGetPostReplies,

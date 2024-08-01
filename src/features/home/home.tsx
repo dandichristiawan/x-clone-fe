@@ -1,11 +1,12 @@
 import Cookies from 'js-cookie';
 import { SpinnerXl } from '@/components/Spinner/xl';
-import { NavbarLeft } from '@/components/Navbar/NavbarLeft';
-import { NavbarRight } from '@/components/Navbar/NavbarRight';
-import { NavbarHome } from '@/components/Navbar/NavbarHome';
+import { NavbarLeft } from '@/components/Navbar/navbar-left';
+import { NavbarRight } from '@/components/Navbar/navbar-right';
+import { NavbarHome } from '@/components/Navbar/navbar-home';
 import { useCreatePost, useGetAllPost } from '@/hooks/home.hooks';
 import { ListPostComponent } from '@/features/home/list-post/list';
 import { CreatePostComponent } from '@/features/home/create-post/post';
+import { FooterHome } from '@/components/Footer/footer-home';
 
 export const Home = () => {
   const isTokenExist = Cookies.get('token');
@@ -40,6 +41,7 @@ export const Home = () => {
           ) : null}
           {loadingData ? <SpinnerXl /> : <ListPostComponent data={data} />}
         </div>
+        <FooterHome />
       </main>
       <NavbarRight />
     </>

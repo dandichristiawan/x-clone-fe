@@ -1,7 +1,7 @@
 import React from 'react';
 import calendar from '@/assets/calendar.svg';
 import { useParams } from 'react-router-dom';
-import { NavbarProfile } from '@/components/Navbar/NavbarProfile';
+import { NavbarProfile } from '@/components/Navbar/navbar-profile';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { formatDateJoined } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
