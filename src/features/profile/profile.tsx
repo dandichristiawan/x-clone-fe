@@ -9,9 +9,11 @@ import { useGetProfile } from '@/hooks/user/profile.hooks';
 import { FollowStatusComponent } from './follow-status/status';
 import { NavbarProfile } from '@/components/Navbar/navbar-profile';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { ProfileLikesPost } from './profile-likes/likes';
 
 
 export const Profile = () => {
+
   const { username } = useParams();
 
   const { data, refetchProfile } = useGetProfile(username);
@@ -24,7 +26,7 @@ export const Profile = () => {
     return (
       <>
         <div className="text-white flex flex-col justify-center items-center w-full">
-          <NavbarProfile username={data.username} posts={data.posts} />
+          <NavbarProfile username={data.username} posts={data.posts} likes={data.likes} active={active} />
           <div className="bg-[#333639] h-48 w-full md:w-2/5 relative text-[#333639]">
             a
           </div>
@@ -92,7 +94,7 @@ export const Profile = () => {
           ) : null}
           {active === 'likes' ? (
             <>
-              <div className="w-2/5 border border-t-0 border-[#333639]">a</div>
+              <ProfileLikesPost username={username} />
             </>
           ) : null}
         </div>

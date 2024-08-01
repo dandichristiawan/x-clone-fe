@@ -5,9 +5,11 @@ import { useNavigate } from 'react-router-dom';
 type Props = {
   username: string;
   posts: number
+  likes: number
+  active: 'post' | 'likes' | null;
 };
 
-export const NavbarProfile = ({ username, posts }: Props) => {
+export const NavbarProfile = ({ username, posts, likes, active }: Props) => {
   const navTo = useNavigate()
   return (
     <nav className="bg-black p-2 border border-gray-500 border-t-0 border-b-1 w-full lg:w-2/5 xl:w-2/5 h-16 sticky top-0 z-50 opacity-75 flex items-center">
@@ -17,7 +19,8 @@ export const NavbarProfile = ({ username, posts }: Props) => {
         </Button>
         <div className="flex flex-col">
           <p className="text-white font-bold">{username}</p>
-          <p className="text-gray-400">{posts} post</p>
+          {active === 'post' ? <p className="text-gray-400">{posts} post</p> : <p className="text-gray-400">{likes} likes</p>}
+          
         </div>
       </div>
     </nav>
