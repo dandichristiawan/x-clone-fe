@@ -76,7 +76,7 @@ export const useCreatePost = () => {
               <Link to={`/post/${data.postId}`}>View</Link>
             </ToastAction>
           ),
-          className: 'bg-[#1d9bf0] border-none rounded-lg text-white',
+          className: 'bg-[#1d9bf0] w-60 h-10 border-none rounded-lg text-white fixed bottom-7 left-1/2 -translate-x-1/2',
         });
       }, 1000);
     } catch (error) {

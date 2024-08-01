@@ -1,18 +1,22 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 import calendar from '@/assets/calendar.svg';
 import { useParams } from 'react-router-dom';
-import { NavbarProfile } from '@/components/Navbar/navbar-profile';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { formatDateJoined } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ProfilePosts } from './profile-post/post';
 import { useGetProfile } from '@/hooks/user/profile.hooks';
 import { FollowStatusComponent } from './follow-status/status';
+import { NavbarProfile } from '@/components/Navbar/navbar-profile';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 
 export const Profile = () => {
   const { username } = useParams();
 
   const { data, refetchProfile } = useGetProfile(username);
+
+  const isTokenExist = Cookies.get('token');
 
   const [active, setActive] = React.useState<'post' | 'likes' | null>('post');
 
@@ -30,10 +34,12 @@ export const Profile = () => {
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <FollowStatusComponent
-                refetchProfile={refetchProfile}
-                userId={data._id}
-              />
+              {isTokenExist && (
+                <FollowStatusComponent
+                  refetchProfile={refetchProfile}
+                  userId={data._id}
+                />
+              )}
             </div>
             <div className="flex flex-col ">
               <p className="text-xl font-bold">{data.fullname}</p>
@@ -58,11 +64,10 @@ export const Profile = () => {
               <Button
                 onClick={() => setActive(active === 'post' ? 'post' : 'post')}
                 variant="ghost"
-                className={`text-[#71767B] hover:bg-transparent hover:text-[#71767B] ${
-                  active === 'post'
-                    ? 'underline underline-offset-8 text-white underline-blue'
-                    : ''
-                } `}
+                className={`text-[#71767B] hover:bg-transparent hover:text-[#71767B] ${active === 'post'
+                  ? 'underline underline-offset-8 text-white underline-blue'
+                  : ''
+                  } `}
               >
                 Post
               </Button>
@@ -71,11 +76,10 @@ export const Profile = () => {
                   setActive(active === 'likes' ? 'likes' : 'likes')
                 }
                 variant="ghost"
-                className={`text-[#71767B] hover:bg-transparent  ${
-                  active === 'likes'
-                    ? 'underline underline-offset-8 text-white underline-blue hover:text-[#71767B]'
-                    : ''
-                }`}
+                className={`text-[#71767B] hover:bg-transparent  ${active === 'likes'
+                  ? 'underline underline-offset-8 text-white underline-blue hover:text-[#71767B]'
+                  : ''
+                  }`}
               >
                 Likes
               </Button>
