@@ -27,8 +27,8 @@ export const ListReplyComponent = ({ replies }: Props) => {
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <div className="flex flex-row gap-2">
-                  <h1 className="font-bold">{val.user.fullname}</h1>
+                <div className="flex flex-row gap-2 items-center text-sm md:text-md lg:text-lg">
+                  <h1 className="font-bold ">{val.user.fullname}</h1>
                   <p className="text-gray-500">@{val.user.username}</p>
                   <p className="text-gray-500">&middot;</p>
                   <p className="text-gray-500">

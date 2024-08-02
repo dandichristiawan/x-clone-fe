@@ -9,11 +9,10 @@ import {
   useReplyPost,
 } from '@/hooks/post-detail.hooks';
 import Cookies from 'js-cookie';
-
+import { SpinnerMd } from '@/components/Spinner/md';
 
 export const PostDetail = () => {
-
-  const isTokenExist = Cookies.get('token')
+  const isTokenExist = Cookies.get('token');
 
   const { id } = useParams();
 
@@ -22,7 +21,7 @@ export const PostDetail = () => {
   const { createReply, loadingReply, reply, setCreateReply, progress } =
     useReplyPost(id);
 
-  const { replies, refetchPostReplies } = useGetPostReplies(id);
+  const { replies, refetchPostReplies, loading } = useGetPostReplies(id);
 
   const onCreateReply = async () => {
     await reply(createReply);
@@ -40,22 +39,20 @@ export const PostDetail = () => {
         <div className="border border-gray-600 border-t-0 flex flex-col w-full md:w-2/5 p-5 m">
           <PostUserComponent data={data} />
         </div>
-        {isTokenExist ?
-          (
-            <>
-              <CreateReplyComponent
-                progress={progress}
-                onChangeVal={setCreateReply}
-                onCreateReply={onCreateReply}
-                val={createReply}
-                loading={loadingReply}
-              />
-            </>
-          ) : (
-            <>
-            </>
-          )}
-        <ListReplyComponent replies={replies} />
+        {isTokenExist ? (
+          <>
+            <CreateReplyComponent
+              progress={progress}
+              onChangeVal={setCreateReply}
+              onCreateReply={onCreateReply}
+              val={createReply}
+              loading={loadingReply}
+            />
+          </>
+        ) : (
+          <></>
+        )}
+        {loading ? <SpinnerMd /> : <ListReplyComponent replies={replies} />}
       </div>
     );
   }

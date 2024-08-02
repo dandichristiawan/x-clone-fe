@@ -4,6 +4,8 @@ import { useToast } from '@/components/ui/use-toast';
 import { ToastAction } from '@radix-ui/react-toast';
 import { PropsData } from '@/features/home/home-types';
 import { Link } from 'react-router-dom';
+import { VITE_API_BASE_URL } from '@/lib/utils';
+
 
 export const useGetAllPost = () => {
   const [data, setData] = React.useState<PropsData[]>();
@@ -11,7 +13,7 @@ export const useGetAllPost = () => {
 
   async function get() {
     try {
-      const res = await fetch('http://192.168.103.56:3000/api/getPosts', {
+      const res = await fetch(`${VITE_API_BASE_URL}/getPosts`, {
         mode: 'cors',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -52,7 +54,7 @@ export const useCreatePost = () => {
     setProgress(25);
     try {
       setProgress(45);
-      const res = await fetch('http://192.168.103.56:3000/api/createPost', {
+      const res = await fetch(`${VITE_API_BASE_URL}/createPost`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${Cookies.get('token')}`,
@@ -76,7 +78,8 @@ export const useCreatePost = () => {
               <Link to={`/post/${data.postId}`}>View</Link>
             </ToastAction>
           ),
-          className: 'bg-[#1d9bf0] w-60 h-10 border-none rounded-lg text-white fixed bottom-7 left-1/2 -translate-x-1/2',
+          className:
+            'bg-[#1d9bf0] w-60 h-10 border-none rounded-lg text-white fixed bottom-7 left-1/2 -translate-x-1/2',
         });
       }, 1000);
     } catch (error) {

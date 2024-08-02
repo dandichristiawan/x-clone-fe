@@ -1,4 +1,5 @@
 import React from 'react';
+import { VITE_API_BASE_URL } from '@/lib/utils';
 import { Likes, Posts, PropsData } from '@/features/profile/profile-types';
 
 export const useGetProfile = (username: string | undefined) => {
@@ -7,7 +8,7 @@ export const useGetProfile = (username: string | undefined) => {
   async function getProfile() {
     try {
       const res = await fetch(
-        `http://192.168.103.56:3000/api/user/${username}`,
+        `${VITE_API_BASE_URL}/user/${username}`,
         {
           mode: 'cors',
           method: 'GET',
@@ -47,7 +48,7 @@ export const useGetProfileLikes = (username: string | undefined) => {
   async function getProfileLikesPost(username: string) {
     try {
       const res = await fetch(
-        `http://192.168.103.56:3000/api/likes/${username}`,
+        `${VITE_API_BASE_URL}/likes/${username}`,
         {
           mode: 'cors',
           method: 'GET',
@@ -83,7 +84,7 @@ export const useGetProfilePost = (username: string | undefined) => {
   async function getProfilePost(username: string) {
     try {
       const res = await fetch(
-        `http://192.168.103.56:3000/api/userPost/${username}`,
+        `${VITE_API_BASE_URL}/userPost/${username}`,
         {
           mode: 'cors',
           method: 'GET',

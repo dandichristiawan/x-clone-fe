@@ -7,7 +7,7 @@ export const FloatingButton = () => {
   return (
     <Button
       onClick={() => navigate('/create-post/mobile')}
-      className="fixed bottom-16 right-5 bg-[#1d9bf0] text-white p-4 h-14 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-opacity-75 md:hidden"
+      className="fixed bottom-[80px] right-5 bg-[#1d9bf0] text-white p-4 h-14 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-opacity-75 md:hidden"
     >
       <img src={pen} alt="" width={30} height={30} />
     </Button>
