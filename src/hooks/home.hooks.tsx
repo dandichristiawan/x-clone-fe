@@ -9,7 +9,7 @@ import { VITE_API_BASE_URL } from '@/lib/utils';
 
 export const useGetAllPost = () => {
   const [data, setData] = React.useState<PropsData[]>();
-  const [loadingData, setLoadingData] = React.useState<boolean>(false);
+  const [loadingData] = React.useState<boolean>(false);
 
   async function get() {
     try {
