@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 
 export const useGetAllPost = () => {
   const [data, setData] = React.useState<PropsData[]>();
-  const [loadingData, setLoadingData] = React.useState<boolean>(true);
+  const [loadingData, setLoadingData] = React.useState<boolean>(false);
 
   async function get() {
     try {
-      const res = await fetch('http://192.168.1.153:3000/api/getPosts', {
+      const res = await fetch('http://192.168.103.56:3000/api/getPosts', {
         mode: 'cors',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -21,16 +21,16 @@ export const useGetAllPost = () => {
       }
       const data = await res.json();
       setData(data);
-      setTimeout(() => {
-        setLoadingData(false);
-      }, 3000);
+      // setTimeout(() => {
+      //   setLoadingData(false);
+      // }, 3000);
     } catch (error) {
       console.error(error);
     }
   }
 
   const refetch = () => {
-    setLoadingData(true);
+    // setLoadingData(true);
     get();
   };
 
@@ -52,7 +52,7 @@ export const useCreatePost = () => {
     setProgress(25);
     try {
       setProgress(45);
-      const res = await fetch('http://192.168.1.153:3000/api/createPost', {
+      const res = await fetch('http://192.168.103.56:3000/api/createPost', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${Cookies.get('token')}`,

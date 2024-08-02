@@ -8,12 +8,24 @@ import chatBubble from '@/assets/chatbubble.svg';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Link } from 'react-router-dom';
 import { formatDateList } from '@/lib/utils';
+import { useLikeUnlikeHooks } from '@/hooks/like.hooks';
+import { Button } from '@/components/ui/button';
 
 type Props = {
   data: PropsData[] | undefined;
+  refetch?: () => void | undefined;
 };
 
-export const ListPostComponent = ({ data }: Props) => {
+export const ListPostComponent = ({ data, refetch }: Props) => {
+  const { likeUnlikePost } = useLikeUnlikeHooks()
+
+  const onLike = async (postId: string) => {
+    await likeUnlikePost(postId)
+    if (refetch) {
+      refetch()
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col w-full md:w-2/5">
@@ -63,7 +75,9 @@ export const ListPostComponent = ({ data }: Props) => {
                     />
                   </div>
                   <div className="flex flex-row  items-center gap-2 w-full">
-                    <img src={love} alt="chat bubble" width={18} height={18} />
+                    <Button variant='ghost' className='bg-transparent p-0 h-0' onClick={() => onLike(i._id)}>
+                      <img src={love} alt="chat bubble" width={18} height={18} className='hover:bg-red' />
+                    </Button>
                     {i.likes > 0 ? (
                       <p className="text-gray-600">{i.likes}</p>
                     ) : null}

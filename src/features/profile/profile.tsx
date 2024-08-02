@@ -39,7 +39,7 @@ export const Profile = () => {
               {isTokenExist && (
                 <FollowStatusComponent
                   refetchProfile={refetchProfile}
-                  userId={data._id}
+                  userId={data.userId}
                 />
               )}
             </div>

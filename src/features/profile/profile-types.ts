@@ -1,5 +1,5 @@
 export interface PropsData {
-  _id: string;
+  userId: string;
   username: string;
   email: string;
   fullname: string;

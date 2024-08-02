@@ -39,7 +39,7 @@ export const Home = () => {
               />
             </>
           ) : null}
-          {loadingData ? <SpinnerXl /> : <ListPostComponent data={data} />}
+          {loadingData ? <SpinnerXl /> : <ListPostComponent data={data} refetch={refetch} />}
         </div>
         <FooterHome />
       </main>
