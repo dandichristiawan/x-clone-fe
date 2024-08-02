@@ -31,7 +31,7 @@ export const ListPostComponent = ({ data, refetch }: Props) => {
       <div className="flex flex-col w-full md:w-2/5">
         {data?.map((i) => (
           <div
-            className={`border border-gray-600 border-b-1 border-l-1 border-r-1 border-t-0 p-4`}
+            className={`border border-gray-600 border-b-1 border-l-1 border-r-1 border-t-1 p-4`}
           >
             <div className="flex flex-row w-full gap-2">
               <Avatar>

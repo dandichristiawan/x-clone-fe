@@ -9,6 +9,7 @@ import {
   useReplyPost,
 } from '@/hooks/post-detail.hooks';
 import Cookies from 'js-cookie';
+import { SpinnerXlCentered } from '@/components/Spinner/xl-centered';
 import { SpinnerMd } from '@/components/Spinner/md';
 
 export const PostDetail = () => {
@@ -16,7 +17,7 @@ export const PostDetail = () => {
 
   const { id } = useParams();
 
-  const { data, refetchPostDetail } = useGetPostDetail(id);
+  const { data, refetchPostDetail, isLoading } = useGetPostDetail(id);
 
   const { createReply, loadingReply, reply, setCreateReply, progress } =
     useReplyPost(id);
@@ -32,11 +33,13 @@ export const PostDetail = () => {
     }, 1000);
   };
 
+  if (isLoading) return <SpinnerXlCentered />;
+
   if (data) {
     return (
       <div className="flex flex-col items-center justify-start text-white">
         <NavbarDetail />
-        <div className="border border-gray-600 border-t-0 flex flex-col w-full md:w-2/5 p-5 m">
+        <div className="border border-gray-600 flex flex-col w-full md:w-2/5 p-5 m">
           <PostUserComponent data={data} />
         </div>
         {isTokenExist ? (

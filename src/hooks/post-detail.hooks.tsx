@@ -5,6 +5,7 @@ import { VITE_API_BASE_URL } from '@/lib/utils';
 
 export const useGetPostDetail = (id: string | undefined) => {
   const [data, setData] = React.useState<PropsData>();
+  const [isLoading, setLoading] = React.useState<boolean>(true);
 
   async function GetPostDetail(id: string | undefined) {
     try {
@@ -18,6 +19,7 @@ export const useGetPostDetail = (id: string | undefined) => {
       }
       const data = await res.json();
       setData(data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +35,7 @@ export const useGetPostDetail = (id: string | undefined) => {
     }
   }, [id]);
 
-  return { data, refetchPostDetail };
+  return { data, refetchPostDetail, isLoading };
 };
 
 export const useGetPostReplies = (id: string | undefined) => {
@@ -42,22 +44,17 @@ export const useGetPostReplies = (id: string | undefined) => {
 
   async function GetPostReplies(id: string | undefined) {
     try {
-      const res = await fetch(
-        `${VITE_API_BASE_URL}/post/${id}/replies`,
-        {
-          mode: 'cors',
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      const res = await fetch(`${VITE_API_BASE_URL}/post/${id}/replies`, {
+        mode: 'cors',
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
       if (!res.ok) {
         throw new Error('Something went wrong!');
       }
       const data = await res.json();
       setReplies(data.replies);
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -86,18 +83,15 @@ export const useReplyPost = (id: string | undefined) => {
     setProgress(25);
     try {
       setProgress(45);
-      const res = await fetch(
-        `${VITE_API_BASE_URL}/post/${id}/reply`,
-        {
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${Cookies.get('token')}`,
-          },
-          method: 'POST',
-          body: JSON.stringify({ reply }),
-        }
-      );
+      const res = await fetch(`${VITE_API_BASE_URL}/post/${id}/reply`, {
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Cookies.get('token')}`,
+        },
+        method: 'POST',
+        body: JSON.stringify({ reply }),
+      });
       setProgress(70);
       if (!res.ok) {
         throw new Error('Something went wrong!');

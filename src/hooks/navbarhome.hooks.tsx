@@ -1,32 +1,32 @@
-import React from 'react'
+import React from 'react';
 
 export const useNavbarHooks = () => {
-    const [isSticky, setIsSticky] = React.useState<boolean>(false);
-    const [showNavbar, setShowNavbar] = React.useState<boolean>(true);
-    const [lastScrollY, setLastScrollY] = React.useState<number>(0);
+  const [isSticky, setIsSticky] = React.useState<boolean>(false);
+  const [showNavbar, setShowNavbar] = React.useState<boolean>(true);
+  const [lastScrollY, setLastScrollY] = React.useState<number>(0);
 
-    React.useEffect(() => {
-        const handleScroll = () => {
-            if (window.innerWidth >= 768) {
-                setIsSticky(true);
-                return;
-            }
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth < 768) {
+        const currentScrollY = window.scrollY;
 
-            const currentScrollY = window.scrollY;
-            if (currentScrollY > lastScrollY) {
-                setShowNavbar(false);
-            } else {
-                setShowNavbar(true);
-            }
-            setLastScrollY(currentScrollY);
-        };
+        if (currentScrollY > lastScrollY) {
+          setShowNavbar(false);
+        } else {
+          setShowNavbar(true);
+        }
 
-        window.addEventListener('scroll', handleScroll);
+        setLastScrollY(currentScrollY);
+      }
+      setIsSticky(window.scrollY > 0);
+    };
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [lastScrollY]);
+    window.addEventListener('scroll', handleScroll);
 
-    return { showNavbar, isSticky }
-}
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
+
+  return { showNavbar, isSticky };
+};

@@ -7,14 +7,11 @@ export const useGetProfile = (username: string | undefined) => {
 
   async function getProfile() {
     try {
-      const res = await fetch(
-        `${VITE_API_BASE_URL}/user/${username}`,
-        {
-          mode: 'cors',
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      const res = await fetch(`${VITE_API_BASE_URL}/user/${username}`, {
+        mode: 'cors',
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
 
       if (!res.ok) {
         throw new Error('Something went wrong!');
@@ -47,22 +44,17 @@ export const useGetProfileLikes = (username: string | undefined) => {
 
   async function getProfileLikesPost(username: string) {
     try {
-      const res = await fetch(
-        `${VITE_API_BASE_URL}/likes/${username}`,
-        {
-          mode: 'cors',
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      const res = await fetch(`${VITE_API_BASE_URL}/likes/${username}`, {
+        mode: 'cors',
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
       if (!res.ok) {
         throw new Error('Something went wrong!');
       }
       const data = await res.json();
       setData(data.likes);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -83,14 +75,11 @@ export const useGetProfilePost = (username: string | undefined) => {
 
   async function getProfilePost(username: string) {
     try {
-      const res = await fetch(
-        `${VITE_API_BASE_URL}/userPost/${username}`,
-        {
-          mode: 'cors',
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      const res = await fetch(`${VITE_API_BASE_URL}/userPost/${username}`, {
+        mode: 'cors',
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
       if (!res.ok) {
         throw new Error('Something went wrong!');
       }
