@@ -7,6 +7,7 @@ export const useNavbarHooks = () => {
   const [hideTimeout, setHideTimeout] = React.useState<NodeJS.Timeout | null>(
     null
   );
+  const [isRefreshing, setIsRefreshing] = React.useState<boolean>(false); // Add this state
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -17,9 +18,18 @@ export const useNavbarHooks = () => {
           clearTimeout(hideTimeout);
         }
 
+        // Check if the scroll is significant (e.g., greater than 100px) and handle pull-to-refresh
         if (currentScrollY > lastScrollY) {
-          setHideTimeout(setTimeout(() => setShowNavbar(false), 100));
+          if (currentScrollY < 100) {
+            // Adjust the threshold if needed
+            setIsRefreshing(true); // Set flag when pull-to-refresh is detected
+            setShowNavbar(true); // Ensure navbar remains visible
+          } else {
+            setIsRefreshing(false); // Reset flag when normal scrolling
+            setHideTimeout(setTimeout(() => setShowNavbar(false), 100));
+          }
         } else {
+          setIsRefreshing(false);
           setShowNavbar(true);
         }
 
@@ -39,5 +49,5 @@ export const useNavbarHooks = () => {
     };
   }, [lastScrollY, hideTimeout]);
 
-  return { showNavbar, isSticky };
+  return { showNavbar, isSticky, isRefreshing };
 };

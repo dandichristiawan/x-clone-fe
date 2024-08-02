@@ -8,16 +8,22 @@ import { IsLoggedOutMenu } from './mobile/is-logged-out-menu';
 
 export const NavbarHome = () => {
   const isTokenExist = Cookies.get('token');
-  const { showNavbar, isSticky } = useNavbarHooks();
+  const { showNavbar, isSticky, isRefreshing } = useNavbarHooks();
   const [active, setActive] = React.useState<'foryou' | 'following' | null>(
     'foryou'
   );
 
   return (
     <nav
-      className={`bg-black border border-gray-600 border-l-1 border-r-1 border-b-1 border-t-0 w-full md:w-2/5 flex flex-row h-20 md:h-16 justify-between z-50 opacity-85  transition-transform duration-300 ${
+      className={`bg-black border border-gray-600 border-l-1 border-r-1 border-b-1 border-t-0 w-full md:w-2/5 flex flex-row h-20 md:h-16 justify-between z-50 opacity-85 transition-transform duration-300 ${
         isSticky ? 'sticky top-0' : ''
-      } ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}
+      } ${
+        isRefreshing
+          ? 'translate-y-0'
+          : showNavbar
+          ? 'translate-y-0'
+          : '-translate-y-full'
+      }`}
     >
       {isTokenExist ? (
         <>
