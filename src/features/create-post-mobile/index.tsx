@@ -15,7 +15,7 @@ export const CreatePostMobile = () => {
   const handlePost = async () => {
     await Tweet(createPost);
     setCreatePost('');
-    navTo(-1);
+    setTimeout(() => navTo(-1), 1000);
   };
 
   return (

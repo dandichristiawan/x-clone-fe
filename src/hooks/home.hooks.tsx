@@ -51,9 +51,8 @@ export const useCreatePost = () => {
 
   async function Tweet(content: string) {
     setLoadingPost(true);
-    setProgress(25);
     try {
-      setProgress(45);
+      setProgress(25);
       const res = await fetch(`${VITE_API_BASE_URL}/createPost`, {
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +61,7 @@ export const useCreatePost = () => {
         method: 'POST',
         body: JSON.stringify({ content }),
       });
-      setProgress(70);
+      setProgress(65);
       if (!res.ok) {
         throw new Error('Something went wrong!');
       }
