@@ -18,7 +18,7 @@ interface FormDataRegister {
 
 export const useLogin = () => {
   const navTo = useNavigate();
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [credentials, setCredentials] = React.useState({
     email: '',
     password: '',
@@ -32,6 +32,7 @@ export const useLogin = () => {
   };
 
   async function LoginApi(formData: FormDataLogin) {
+    setIsLoading(true);
     try {
       const response = await fetch(`${VITE_API_BASE_URL}/login`, {
         headers: { 'Content-Type': 'application/json' },
@@ -54,7 +55,7 @@ export const useLogin = () => {
       navTo('/home');
     } catch (error) {
       console.error(error);
-      setIsLoading(true);
+      setIsLoading(false);
     }
   }
 
@@ -64,7 +65,7 @@ export const useLogin = () => {
 export const useRegister = () => {
   const navTo = useNavigate();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const [registerCredentials, setRegisterCredentials] = React.useState({
     fullname: '',
@@ -82,6 +83,7 @@ export const useRegister = () => {
   };
 
   async function RegisterApi(formData: FormDataRegister): Promise<void> {
+    setIsLoading(true);
     try {
       const response = await fetch(`${VITE_API_BASE_URL}/signup`, {
         headers: { 'Content-Type': 'application/json' },
@@ -108,7 +110,7 @@ export const useRegister = () => {
       });
     } catch (error) {
       console.error(error);
-      setIsLoading(true);
+      setIsLoading(false);
     }
   }
 
