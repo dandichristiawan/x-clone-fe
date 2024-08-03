@@ -10,23 +10,29 @@ import { FollowStatusComponent } from './follow-status/status';
 import { NavbarProfile } from '@/components/Navbar/navbar-profile';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ProfileLikesPost } from './profile-likes/likes';
-
+import { SpinnerXlCentered } from '@/components/Spinner/xl-centered';
 
 export const Profile = () => {
-
   const { username } = useParams();
 
-  const { data, refetchProfile } = useGetProfile(username);
+  const { data, refetchProfile, loadingProfile } = useGetProfile(username);
 
   const isTokenExist = Cookies.get('token');
 
   const [active, setActive] = React.useState<'post' | 'likes' | null>('post');
 
+  if (loadingProfile) return <SpinnerXlCentered />;
+
   if (data) {
     return (
       <>
         <div className="text-white flex flex-col justify-center items-center w-full">
-          <NavbarProfile username={data.username} posts={data.posts} likes={data.likes} active={active} />
+          <NavbarProfile
+            username={data.username}
+            posts={data.posts}
+            likes={data.likes}
+            active={active}
+          />
           <div className="bg-[#333639] h-48 w-full md:w-2/5 relative text-[#333639]">
             a
           </div>
@@ -66,10 +72,11 @@ export const Profile = () => {
               <Button
                 onClick={() => setActive(active === 'post' ? 'post' : 'post')}
                 variant="ghost"
-                className={`text-[#71767B] hover:bg-transparent hover:text-[#71767B] ${active === 'post'
-                  ? 'underline underline-offset-8 text-white underline-blue'
-                  : ''
-                  } `}
+                className={`text-[#71767B] hover:bg-transparent hover:text-[#71767B] ${
+                  active === 'post'
+                    ? 'underline underline-offset-8 text-white underline-blue'
+                    : ''
+                } `}
               >
                 Post
               </Button>
@@ -78,10 +85,11 @@ export const Profile = () => {
                   setActive(active === 'likes' ? 'likes' : 'likes')
                 }
                 variant="ghost"
-                className={`text-[#71767B] hover:bg-transparent  ${active === 'likes'
-                  ? 'underline underline-offset-8 text-white underline-blue hover:text-[#71767B]'
-                  : ''
-                  }`}
+                className={`text-[#71767B] hover:bg-transparent  ${
+                  active === 'likes'
+                    ? 'underline underline-offset-8 text-white underline-blue hover:text-[#71767B]'
+                    : ''
+                }`}
               >
                 Likes
               </Button>

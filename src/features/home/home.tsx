@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie';
-import { SpinnerXl } from '@/components/Spinner/xl';
 import { NavbarLeft } from '@/components/Navbar/navbar-left';
 import { NavbarRight } from '@/components/Navbar/navbar-right';
 import { NavbarHome } from '@/components/Navbar/navbar-home';
@@ -7,6 +6,7 @@ import { useCreatePost, useGetAllPost } from '@/hooks/home.hooks';
 import { ListPostComponent } from '@/features/home/list-post/list';
 import { CreatePostComponent } from '@/features/home/create-post/post';
 import { FooterHome } from '@/components/Footer/footer-home';
+import { SpinnerXlCentered } from '@/components/Spinner/xl-centered';
 
 export const Home = () => {
   const isTokenExist = Cookies.get('token');
@@ -39,7 +39,11 @@ export const Home = () => {
               />
             </>
           ) : null}
-          {loadingData ? <SpinnerXl /> : <ListPostComponent data={data} refetch={refetch} />}
+          {loadingData ? (
+            <SpinnerXlCentered />
+          ) : (
+            <ListPostComponent data={data} refetch={refetch} />
+          )}
         </div>
         <FooterHome />
       </main>

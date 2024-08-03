@@ -2,7 +2,7 @@ import React from 'react';
 import Cookies from 'js-cookie';
 import { VITE_API_BASE_URL } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from '@/components/ui/use-toast';
 import { ToastAction } from '@radix-ui/react-toast';
 
 interface FormDataLogin {
@@ -18,7 +18,7 @@ interface FormDataRegister {
 
 export const useLogin = () => {
   const navTo = useNavigate();
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [credentials, setCredentials] = React.useState({
     email: '',
     password: '',
@@ -32,7 +32,6 @@ export const useLogin = () => {
   };
 
   async function LoginApi(formData: FormDataLogin) {
-    setIsLoading(true);
     try {
       const response = await fetch(`${VITE_API_BASE_URL}/login`, {
         headers: { 'Content-Type': 'application/json' },
@@ -55,6 +54,7 @@ export const useLogin = () => {
       navTo('/home');
     } catch (error) {
       console.error(error);
+      setIsLoading(true);
     }
   }
 
@@ -63,8 +63,8 @@ export const useLogin = () => {
 
 export const useRegister = () => {
   const navTo = useNavigate();
-  const { toast } = useToast()
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   const [registerCredentials, setRegisterCredentials] = React.useState({
     fullname: '',
@@ -82,7 +82,6 @@ export const useRegister = () => {
   };
 
   async function RegisterApi(formData: FormDataRegister): Promise<void> {
-    setIsLoading(true);
     try {
       const response = await fetch(`${VITE_API_BASE_URL}/signup`, {
         headers: { 'Content-Type': 'application/json' },
@@ -95,18 +94,21 @@ export const useRegister = () => {
       }
       setIsLoading(false);
       toast({
-        title: "Your account have been successfully created!",
-        action: <ToastAction
-          altText='Login'
-          onClick={() => navTo('/login')}
-          className='bg-white text-black font-bold rounded-3xl p-2 w-3/12'
-        >
-          Login
-        </ToastAction>,
-        className: "bg-[#1d9bf0] border-none rounded-lg text-white",
+        title: 'Your account have been successfully created!',
+        action: (
+          <ToastAction
+            altText="Login"
+            onClick={() => navTo('/login')}
+            className="bg-white text-black font-bold rounded-3xl p-2 w-3/12"
+          >
+            Login
+          </ToastAction>
+        ),
+        className: 'bg-[#1d9bf0] border-none rounded-lg text-white',
       });
     } catch (error) {
       console.error(error);
+      setIsLoading(true);
     }
   }
 
@@ -115,5 +117,18 @@ export const useRegister = () => {
     registerCredentials,
     handleValChange,
     RegisterApi,
+  };
+};
+
+export const usePasswordToggle = () => {
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
+  return {
+    showPassword,
+    toggleShowPassword,
   };
 };

@@ -4,6 +4,7 @@ import { Likes, Posts, PropsData } from '@/features/profile/profile-types';
 
 export const useGetProfile = (username: string | undefined) => {
   const [data, setData] = React.useState<PropsData>();
+  const [loadingProfile, setLoadingProfile] = React.useState<boolean>(true)
 
   async function getProfile() {
     try {
@@ -18,6 +19,7 @@ export const useGetProfile = (username: string | undefined) => {
       }
       const data = await res.json();
       setData(data);
+      setLoadingProfile(false)
     } catch (error) {
       console.error(error);
     }
@@ -35,7 +37,7 @@ export const useGetProfile = (username: string | undefined) => {
     }
   }, [username]);
 
-  return { data, refetchProfile };
+  return { data, refetchProfile, loadingProfile };
 };
 
 export const useGetProfileLikes = (username: string | undefined) => {

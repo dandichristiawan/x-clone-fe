@@ -6,10 +6,9 @@ import { PropsData } from '@/features/home/home-types';
 import { Link } from 'react-router-dom';
 import { VITE_API_BASE_URL } from '@/lib/utils';
 
-
 export const useGetAllPost = () => {
   const [data, setData] = React.useState<PropsData[]>();
-  const [loadingData] = React.useState<boolean>(false);
+  const [loadingData, setLoadingData] = React.useState<boolean>(true);
 
   async function get() {
     try {
@@ -23,16 +22,13 @@ export const useGetAllPost = () => {
       }
       const data = await res.json();
       setData(data);
-      // setTimeout(() => {
-      //   setLoadingData(false);
-      // }, 3000);
+      setLoadingData(false);
     } catch (error) {
       console.error(error);
     }
   }
 
   const refetch = () => {
-    // setLoadingData(true);
     get();
   };
 
